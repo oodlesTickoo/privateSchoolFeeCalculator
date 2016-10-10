@@ -5,48 +5,479 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         return target.split(search).join(replacement);
     };
 
-    $scope.indexlevel=0.04;
+    $scope.begnYearInvestment = 2016;
 
-    $scope.grossAnnualIncome = 120000;
-    $scope.homeMortgage = 500000;
-    $scope.investmentPropertyMortgage = 0;
-    $scope.creditCardDebt = 2000;
-    $scope.carLoan = 20000;
-    $scope.personalLoan = 0;
-    $scope.otherLoan = 0;
-    $scope.homeValue = 800000;
-    $scope.cashAtBank = 20000;
-    $scope.otherInvestment = 20000;
-    $scope.superBalance = 100000;
-    $scope.ecLife = 250000;
-    $scope.ecTPD = 0;
-    $scope.ecIP = 0;
-    $scope.ecTrauma = 0;
     $scope.numChildren = 2;
-    $scope.funeralCost = 20000;
-    $scope.educationExpensePerYearPerChild = 5000;
-    $scope.familyLivingCostPerYear = 90000;
-    $scope.inflation = 2;
-    $scope.rateOfReturn = 5;
-    $scope.moneyToBeBorrowed = 400000;
-    $scope.valueOfNewProperty = 500000;
-    $scope.ageSpouse = 47;
-    $scope.spouseSalary = 50000;
-    $scope.ageChildren1 = 3;
-    $scope.ageChildren2 = 5;
-    $scope.ageChildren3 = 10;
-    $scope.ageChildren4 = 10;
-    $scope.ageChildren5 = 10;
-    $scope.ageChildren6 = 10;
-    $scope.ageChildren7 = 10;
-    $scope.ageChildren8 = 10;
+
+    $scope.investmentReturn = 5000;
+
+    $scope.investmentVolatility = 5000;
+
+    $scope.schoolYear1 = 2017;
+
+    $scope.schoolDuration1 = 10;
+
+    $scope.schoolYear2 = 2017;
+
+    $scope.schoolDuration2 = 10;
+
+    $scope.schoolYear3 = 2017;
+
+    $scope.schoolDuration3 = 10;
+
+    $scope.schoolYear4 = 2017;
+
+    $scope.schoolDuration4 = 10;
+
+    $scope.schoolYear5 = 2017;
+
+    $scope.schoolDuration5 = 10;
+
+    $scope.schoolYear6 = 2017;
+
+    $scope.schoolDuration6 = 10;
+
+    var begnYearInvestmentSlider = document.getElementById("begnYearInvestmentSlider"),
+        numChildrenSlider = document.getElementById("numChildrenSlider"),
+        investmentReturnSlider = document.getElementById("investmentReturnSlider"),
+        investmentVolatilitySlider = document.getElementById("investmentVolatilitySlider"),
+        schoolYear1Slider = document.getElementById("schoolYear1Slider"),
+        schoolDuration1Slider = document.getElementById("schoolDuration1Slider"),
+        schoolYear2Slider = document.getElementById("schoolYear2Slider"),
+        schoolDuration2Slider = document.getElementById("schoolDuration2Slider"),
+        schoolYear3Slider = document.getElementById("schoolYear3Slider"),
+        schoolDuration3Slider = document.getElementById("schoolDuration3Slider"),
+        schoolYear4Slider = document.getElementById("schoolYear4Slider"),
+        schoolDuration4Slider = document.getElementById("schoolDuration4Slider"),
+        schoolYear5Slider = document.getElementById("schoolYear5Slider"),
+        schoolDuration5Slider = document.getElementById("schoolDuration5Slider"),
+        schoolYear6Slider = document.getElementById("schoolYear6Slider"),
+        schoolDuration6Slider = document.getElementById("schoolDuration6Slider");
+
+    var begnYearInvestmentInput = document.getElementById("begnYearInvestmentInput"),
+        numChildrenInput = document.getElementById("numChildrenInput"),
+        investmentReturnInput = document.getElementById("investmentReturnInput"),
+        investmentVolatilityInput = document.getElementById("investmentVolatilityInput"),
+        schoolYear1Input = document.getElementById("schoolYear1Input"),
+        schoolDuration1Input = document.getElementById("schoolDuration1Input"),
+        schoolYear2Input = document.getElementById("schoolYear2Input"),
+        schoolDuration2Input = document.getElementById("schoolDuration2Input"),
+        schoolYear3Input = document.getElementById("schoolYear3Input"),
+        schoolDuration3Input = document.getElementById("schoolDuration3Input"),
+        schoolYear4Input = document.getElementById("schoolYear4Input"),
+        schoolDuration4Input = document.getElementById("schoolDuration4Input"),
+        schoolYear5Input = document.getElementById("schoolYear5Input"),
+        schoolDuration5Input = document.getElementById("schoolDuration5Input"),
+        schoolYear6Input = document.getElementById("schoolYear6Input"),
+        schoolDuration6Input = document.getElementById("schoolDuration6Input");
+
+    noUiSlider.create(begnYearInvestmentSlider, {
+        start: $scope.begnYearInvestment,
+        connect: 'lower',
+        range: {
+            min: [2016],
+            max: [2022],
+        },
+        format: wNumb({
+            decimals: 0,
+        }),
+        step: 1
+    });
+
+    noUiSlider.create(numChildrenSlider, {
+        start: $scope.numChildren,
+        connect: 'lower',
+        range: {
+            min: [0],
+            max: [6]
+        },
+        step: 1,
+        format:wNumb({
+            decimals:0
+        })
+    });
+
+    noUiSlider.create(investmentReturnSlider, {
+        start: $scope.investmentReturn,
+        range: {
+            min: [1000],
+            max: [10000]
+        },
+        step: 500,
+        format: wNumb({
+            decimals: 0,
+            prefix: '$',
+            thousand: ','
+        }),
+        connect:'lower'
+    });
+
+    noUiSlider.create(investmentVolatilitySlider, {
+        start: $scope.investmentVolatility,
+        range: {
+            min: [1000],
+            max: [10000]
+        },
+        step: 500,
+        format: wNumb({
+            decimals: 0,
+            prefix: '$',
+            thousand: ','
+        }),
+        connect:'lower'
+    });
+
+    noUiSlider.create(schoolYear1Slider, {
+        start: $scope.schoolYear1,
+        connect: 'lower',
+        range: {
+            min: [2015],
+            max: [2020]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolYear2Slider, {
+        start: $scope.schoolYear2,
+        connect: 'lower',
+        range: {
+            min: [2015],
+            max: [2020]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolYear3Slider, {
+        start: $scope.schoolYear3,
+        connect: 'lower',
+        range: {
+            min: [2015],
+            max: [2020]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolYear4Slider, {
+        start: $scope.schoolYear4,
+        connect: 'lower',
+        range: {
+            min: [2015],
+            max: [2020]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolYear5Slider, {
+        start: $scope.schoolYear5,
+        connect: 'lower',
+        range: {
+            min: [2015],
+            max: [2020]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolYear6Slider, {
+        start: $scope.schoolYear6,
+        connect: 'lower',
+        range: {
+            min: [2015],
+            max: [2020]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolDuration1Slider, {
+        start: $scope.schoolDuration1,
+         connect: 'lower',
+        range: {
+            min: [1],
+            max: [12]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolDuration2Slider, {
+        start: $scope.schoolDuration2,
+        connect: 'lower',
+        range: {
+            min: [1],
+            max: [12]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolDuration3Slider, {
+        start: $scope.schoolDuration3,
+        connect: 'lower',
+        range: {
+            min: [1],
+            max: [12]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolDuration4Slider, {
+        start: $scope.schoolDuration4,
+        connect: 'lower',
+        range: {
+            min: [1],
+            max: [12]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolDuration5Slider, {
+        start: $scope.schoolDuration5,
+        connect: 'lower',
+        range: {
+            min: [1],
+            max: [12]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+
+    });
+
+    noUiSlider.create(schoolDuration6Slider, {
+        start: $scope.schoolDuration6,
+        connect: 'lower',
+        range: {
+            min: [1],
+            max: [12]
+        },
+        step: 1,
+        format:wNumb({
+            decimals : 0
+        })
+    });
 
 
-    $scope.genderOption = true;
-    $scope.spouseOption = true;
-    $scope.smokeOption = false;
-    $scope.spouseWorkOption = true;
-    $scope.buyOption = true;
+    begnYearInvestmentSlider.noUiSlider.on('update', function(values, handle) {
+        begnYearInvestmentInput.value = values[handle];
+        // $scope.begnYearInvestment = values[handle];
+    });
+
+    begnYearInvestmentInput.addEventListener("change", function() {
+        begnYearInvestmentSlider.noUiSlider.set(this.value);
+    });
+
+        numChildrenSlider.noUiSlider.on('update', function(values, handle) {
+        numChildrenInput.value = values[handle];
+        // console.log($scope.numChildren);
+        // console.log(typeof $scope.numChildren);
+    });
+
+    numChildrenInput.addEventListener("change", function() {
+        numChildrenSlider.noUiSlider.set(numChildrenInput.value);
+    });
+
+        investmentReturnSlider.noUiSlider.on('update', function(values, handle) {
+        investmentReturnInput.value = values[handle];
+        $scope.investmentReturn = values[handle];
+    });
+
+    investmentReturnInput.addEventListener("change", function() {
+        investmentReturnSlider.noUiSlider.set(investmentReturnInput.value);
+    });
+
+        investmentVolatilitySlider.noUiSlider.on('update', function(values, handle) {
+        investmentVolatilityInput.value = values[handle];
+        $scope.investmentVolatility = values[handle];
+    });
+
+    investmentVolatilityInput.addEventListener("change", function() {
+        investmentVolatilitySlider.noUiSlider.set(investmentVolatilityInput.value);
+    });
+
+        schoolYear1Slider.noUiSlider.on('update', function(values, handle) {
+        schoolYear1Input.value = values[handle];
+    });
+
+    schoolYear1Input.addEventListener("change", function() {
+        schoolYear1Slider.noUiSlider.set(schoolYear1Input.value);
+    });
+
+        schoolYear2Slider.noUiSlider.on('update', function(values, handle) {
+        schoolYear2Input.value = values[handle];
+    });
+
+    schoolYear2Input.addEventListener("change", function() {
+        schoolYear2Slider.noUiSlider.set(schoolYear2Input.value);
+    });
+
+        schoolYear3Slider.noUiSlider.on('update', function(values, handle) {
+        schoolYear3Input.value = values[handle];
+    });
+
+    schoolYear3Input.addEventListener("change", function() {
+        schoolYear3Slider.noUiSlider.set(schoolYear3Input.value);
+    });
+
+        schoolYear4Slider.noUiSlider.on('update', function(values, handle) {
+        schoolYear4Input.value = values[handle];
+    });
+
+    schoolYear4Input.addEventListener("change", function() {
+        schoolYear4Slider.noUiSlider.set(schoolYear4Input.value);
+    });
+
+        schoolYear5Slider.noUiSlider.on('update', function(values, handle) {
+        schoolYear5Input.value = values[handle];
+    });
+
+    schoolYear5Input.addEventListener("change", function() {
+        schoolYear5Slider.noUiSlider.set(schoolYear5Input.value);
+    });
+
+        schoolYear6Slider.noUiSlider.on('update', function(values, handle) {
+        schoolYear6Input.value = values[handle];
+    });
+
+    schoolYear6Input.addEventListener("change", function() {
+        schoolYear6Slider.noUiSlider.set(schoolYear6Input.value);
+    });
+
+    //     schoolYear1Slider.noUiSlider.on('update', function(values, handle) {
+    //     schoolYear1Input.value = values[handle];
+    // });
+
+    // schoolYear1Input.addEventListener("change", function() {
+    //     schoolYear1Slider.noUiSlider.set(schoolYear1Input.value);
+    // });
+
+        schoolDuration1Slider.noUiSlider.on('update', function(values, handle) {
+        schoolDuration1Input.value = values[handle];
+    });
+
+    schoolDuration1Input.addEventListener("change", function() {
+        schoolDuration1Slider.noUiSlider.set(schoolDuration1Input.value);
+    });
+
+         schoolDuration2Slider.noUiSlider.on('update', function(values, handle) {
+        schoolDuration2Input.value = values[handle];
+    });
+
+    schoolDuration2Input.addEventListener("change", function() {
+        schoolDuration2Slider.noUiSlider.set(schoolDuration2Input.value);
+    });
+
+         schoolDuration3Slider.noUiSlider.on('update', function(values, handle) {
+        schoolDuration3Input.value = values[handle];
+    });
+
+    schoolDuration3Input.addEventListener("change", function() {
+        schoolDuration3Slider.noUiSlider.set(schoolDuration3Input.value);
+    });
+
+         schoolDuration4Slider.noUiSlider.on('update', function(values, handle) {
+        schoolDuration4Input.value = values[handle];
+    });
+
+    schoolDuration4Input.addEventListener("change", function() {
+        schoolDuration4Slider.noUiSlider.set(schoolDuration4Input.value);
+    });
+
+         schoolDuration5Slider.noUiSlider.on('update', function(values, handle) {
+        schoolDuration5Input.value = values[handle];
+    });
+
+    schoolDuration5Input.addEventListener("change", function() {
+        schoolDuration5Slider.noUiSlider.set(schoolDuration5Input.value);
+    });
+
+         schoolDuration6Slider.noUiSlider.on('update', function(values, handle) {
+        schoolDuration6Input.value = values[handle];
+    });
+
+    schoolDuration6Input.addEventListener("change", function() {
+        schoolDuration6Slider.noUiSlider.set(schoolDuration6Input.value);
+    });
+
+    $scope.indexlevel = 0.04;
+
+    // $scope.grossAnnualIncome = 120000;
+    // $scope.homeMortgage = 500000;
+    // $scope.investmentPropertyMortgage = 0;
+    // $scope.creditCardDebt = 2000;
+    // $scope.carLoan = 20000;
+    // $scope.personalLoan = 0;
+    // $scope.otherLoan = 0;
+    // $scope.homeValue = 800000;
+    // $scope.cashAtBank = 20000;
+    // $scope.otherInvestment = 20000;
+    // $scope.superBalance = 100000;
+    // $scope.ecLife = 250000;
+    // $scope.ecTPD = 0;
+    // $scope.ecIP = 0;
+    // $scope.ecTrauma = 0;
+    // $scope.numChildren = 2;
+    // $scope.funeralCost = 20000;
+    // $scope.educationExpensePerYearPerChild = 5000;
+    // $scope.familyLivingCostPerYear = 90000;
+    // $scope.inflation = 2;
+    // $scope.rateOfReturn = 5;
+    // $scope.moneyToBeBorrowed = 400000;
+    // $scope.valueOfNewProperty = 500000;
+    // $scope.ageSpouse = 47;
+    // $scope.spouseSalary = 50000;
+    // $scope.ageChildren1 = 3;
+    // $scope.ageChildren2 = 5;
+    // $scope.ageChildren3 = 10;
+    // $scope.ageChildren4 = 10;
+    // $scope.ageChildren5 = 10;
+    // $scope.ageChildren6 = 10;
+    // $scope.ageChildren7 = 10;
+    // $scope.ageChildren8 = 10;
+
+
+    // $scope.genderOption = true;
+    // $scope.spouseOption = true;
+    // $scope.smokeOption = false;
+    // $scope.spouseWorkOption = true;
+    // $scope.buyOption = true;
 
 
     $scope.studyingOption1Change = function(studying1) {
@@ -83,10 +514,12 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         { id: 4, name: "FC Growth" },
         { id: 5, name: "Select your own investment return" },
     ];
-    function findOneTimeFee(temp){
+
+    function findOneTimeFee(temp) {
 
     }
-    function findAnnualFee(temp){
+
+    function findAnnualFee(temp) {
 
     }
 
@@ -106,12 +539,13 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
             totalFeeArray = [],
             pInvestArray = [],
             pBalArray = [];
-        var oneFeeArray=[], annualFeeArray=[];    
+        var oneFeeArray = [],
+            annualFeeArray = [];
 
         for (i = 0; i < numChildren; i++) {
             childGradArray[i] = childSchoolArray[i] + childDurationArray[i] - 1;
-            oneFeeArray[i]=findOneTimeFee(100);
-            annualFeeArray[i]=findAnnualFee(100);
+            oneFeeArray[i] = findOneTimeFee(100);
+            annualFeeArray[i] = findAnnualFee(100);
         }
 
         min = $scope.begnYearInvestment;
@@ -123,15 +557,15 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         }
 
         for (i = 0; i < numChildren; i++) {
-            if (childStudyingArray[i]==true) {
-                for(j=0;j<childDurationArray[i];j++){
-                    feeArray[i][j]=annualFeeArray[j]*((1+$scope.indexlevel)^(yearArray[j]-$scope.begnYearInvestment));
+            if (childStudyingArray[i] == true) {
+                for (j = 0; j < childDurationArray[i]; j++) {
+                    feeArray[i][j] = annualFeeArray[j] * ((1 + $scope.indexlevel) ^ (yearArray[j] - $scope.begnYearInvestment));
                 }
             } else {
-                temp=childSchoolArray[i]-min;
-                feeArray[i][0]=annualFeeArray[0]+oneFeeArray[0]*((1+$scope.indexlevel)^temp);
-                for(j=1;j<=childDurationArray[i];j++){
-                    feeArray[i][j]=annualFeeArray[j]*((1+$scope.indexlevel)^(yearArray[j]-$scope.begnYearInvestment));
+                temp = childSchoolArray[i] - min;
+                feeArray[i][0] = annualFeeArray[0] + oneFeeArray[0] * ((1 + $scope.indexlevel) ^ temp);
+                for (j = 1; j <= childDurationArray[i]; j++) {
+                    feeArray[i][j] = annualFeeArray[j] * ((1 + $scope.indexlevel) ^ (yearArray[j] - $scope.begnYearInvestment));
                 }
             }
         }
@@ -152,6 +586,9 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         }
         PdfMaker.createChart($scope.dob, $scope.age, $scope.fy, $scope.cses, $scope.thp, $scope.resultWithoutSS, $scope.resultWithSS, $scope.needSS, $scope.optimisedSS, toggleNeeded);
     });
+
+    console.log(typeof $scope.investmentVolatility);
+    console.log(typeof $scope.numChildren);
 
 
 }]);
