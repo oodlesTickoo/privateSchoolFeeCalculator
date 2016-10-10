@@ -297,7 +297,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
     begnYearInvestmentSlider.noUiSlider.on('update', function(values, handle) {
         begnYearInvestmentInput.value = values[handle];
-        // $scope.begnYearInvestment = values[handle];
+        $scope.begnYearInvestment = values[handle];
     });
 
     begnYearInvestmentInput.addEventListener("change", function() {
@@ -306,6 +306,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         numChildrenSlider.noUiSlider.on('update', function(values, handle) {
         numChildrenInput.value = values[handle];
+        $scope.numChildren = values[handle];
         // console.log($scope.numChildren);
         // console.log(typeof $scope.numChildren);
     });
@@ -334,6 +335,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolYear1Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear1Input.value = values[handle];
+        $scope.schoolYear1 = values[handle];
     });
 
     schoolYear1Input.addEventListener("change", function() {
@@ -342,6 +344,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolYear2Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear2Input.value = values[handle];
+        $scope.schoolYear2 = values[handle];
     });
 
     schoolYear2Input.addEventListener("change", function() {
@@ -350,6 +353,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolYear3Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear3Input.value = values[handle];
+        $scope.schoolYear3 = values[handle];
     });
 
     schoolYear3Input.addEventListener("change", function() {
@@ -358,6 +362,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolYear4Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear4Input.value = values[handle];
+        $scope.schoolYear4 = values[handle];
     });
 
     schoolYear4Input.addEventListener("change", function() {
@@ -366,6 +371,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolYear5Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear5Input.value = values[handle];
+        $scope.schoolYear5 = values[handle];
     });
 
     schoolYear5Input.addEventListener("change", function() {
@@ -374,6 +380,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolYear6Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear6Input.value = values[handle];
+        $scope.schoolYear6 = values[handle];
     });
 
     schoolYear6Input.addEventListener("change", function() {
@@ -390,6 +397,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         schoolDuration1Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration1Input.value = values[handle];
+        $scope.schoolDuration1 = values[handle];
     });
 
     schoolDuration1Input.addEventListener("change", function() {
@@ -398,6 +406,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
          schoolDuration2Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration2Input.value = values[handle];
+        $scope.schoolDuration2 = values[handle];
     });
 
     schoolDuration2Input.addEventListener("change", function() {
@@ -406,6 +415,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
          schoolDuration3Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration3Input.value = values[handle];
+        $scope.schoolDuration3 = values[handle];
     });
 
     schoolDuration3Input.addEventListener("change", function() {
@@ -414,6 +424,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
          schoolDuration4Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration4Input.value = values[handle];
+        $scope.schoolDuration4 = values[handle];
     });
 
     schoolDuration4Input.addEventListener("change", function() {
@@ -422,6 +433,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
          schoolDuration5Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration5Input.value = values[handle];
+        $scope.schoolDuration5 = values[handle];
     });
 
     schoolDuration5Input.addEventListener("change", function() {
@@ -430,6 +442,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
          schoolDuration6Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration6Input.value = values[handle];
+        $scope.schoolDuration6 = values[handle];
     });
 
     schoolDuration6Input.addEventListener("change", function() {
