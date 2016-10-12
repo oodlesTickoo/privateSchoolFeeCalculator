@@ -972,6 +972,47 @@ $scope.schoolObjects=[
 ,{ id: 115, name: "St Mary's College, Hobart", address: '164 Harrington St- Hobart TAS 7000', state: 'TAS', regFees:0, upfrontFee:0, annualFee:3958, tuitionFee:3957.69 }
 ,{ id: 116, name: 'Launceston Chruch Grammar School', address: '36 Button St- Mowbray TAS 7248', state: 'TAS', regFees:100, upfrontFee:100, annualFee:12900, tuitionFee:12900 }
 ,{ id: 117, name: 'Launceston Christian School', address: ' 452A W Tamar Hwy- Riverside TAS 7250', state: 'TAS', regFees:1300, upfrontFee:1300, annualFee:4802, tuitionFee:4801.54 }];
+    
+    var school1,school2,school3,school4,school5,school6;
+
+    school1 = $scope.schoolObjects[0];
+    school2 = $scope.schoolObjects[0];
+    school3 = $scope.schoolObjects[0];
+    school4 = $scope.schoolObjects[0];
+    school5 = $scope.schoolObjects[0];
+    school6 = $scope.schoolObjects[0];
+
+    $('.sp1').on('change', function() {
+        school1 = $('.sp1 option:selected').val();
+        // calculateFinal();
+    });
+
+    $('.sp2').on('change', function() {
+        school2 = $('.sp2 option:selected').val();
+        // calculateFinal();
+    });
+
+    $('.sp3').on('change', function() {
+        school3 = $('.sp3 option:selected').val();
+        // calculateFinal();
+    });
+
+    $('.sp4').on('change', function() {
+        school4 = $('.sp4 option:selected').val();
+        // calculateFinal();
+    });
+
+    $('.sp5').on('change', function() {
+        school5 = $('.sp5 option:selected').val();
+        // calculateFinal();
+    });
+
+    $('.sp6').on('change', function() {
+        school6 = $('.sp6 option:selected').val();
+        // calculateFinal();
+    });
+
+
 
     $scope.begnYearInvestment = 2016;
 
