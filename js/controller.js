@@ -5,49 +5,21 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         return target.split(search).join(replacement);
     };
 
-    $scope.indexlevel=0.04;
+    var paymentFrequency = "0";
+    $timeout(function() {
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 2,
+        });
+        $('.selectpicker option[value="0"]').attr("selected", true);
+        $('.selectpicker').selectpicker('refresh');
+    });
 
-    $scope.grossAnnualIncome = 120000;
-    $scope.homeMortgage = 500000;
-    $scope.investmentPropertyMortgage = 0;
-    $scope.creditCardDebt = 2000;
-    $scope.carLoan = 20000;
-    $scope.personalLoan = 0;
-    $scope.otherLoan = 0;
-    $scope.homeValue = 800000;
-    $scope.cashAtBank = 20000;
-    $scope.otherInvestment = 20000;
-    $scope.superBalance = 100000;
-    $scope.ecLife = 250000;
-    $scope.ecTPD = 0;
-    $scope.ecIP = 0;
-    $scope.ecTrauma = 0;
-    $scope.numChildren = 2;
-    $scope.funeralCost = 20000;
-    $scope.educationExpensePerYearPerChild = 5000;
-    $scope.familyLivingCostPerYear = 90000;
-    $scope.inflation = 2;
-    $scope.rateOfReturn = 5;
-    $scope.moneyToBeBorrowed = 400000;
-    $scope.valueOfNewProperty = 500000;
-    $scope.ageSpouse = 47;
-    $scope.spouseSalary = 50000;
-    $scope.ageChildren1 = 3;
-    $scope.ageChildren2 = 5;
-    $scope.ageChildren3 = 10;
-    $scope.ageChildren4 = 10;
-    $scope.ageChildren5 = 10;
-    $scope.ageChildren6 = 10;
-    $scope.ageChildren7 = 10;
-    $scope.ageChildren8 = 10;
-
-
-    $scope.genderOption = true;
-    $scope.spouseOption = true;
-    $scope.smokeOption = false;
-    $scope.spouseWorkOption = true;
-    $scope.buyOption = true;
-
+    $('.selectpicker').on('change', function() {
+        paymentFrequency = $('.selectpicker option:selected').val();
+        console.log("paymentFrequency", paymentFrequency)
+        $timeout(0);
+    });
 
     $scope.studyingOption1Change = function(studying1) {
         $scope.studyingOption1 = studying1;
@@ -83,11 +55,46 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         { id: 4, name: "FC Growth" },
         { id: 5, name: "Select your own investment return" },
     ];
-    function findOneTimeFee(temp){
+
+    $scope.portAnnualReturn = [0.0456, 0.0655, 0.0853, 0.1009, 0.1165, 0.06];
+    $scope.sd = [0.05, 0.06, 0.07, 0.08, 0.09, 0.02];
+    $scope.simProb = Math.random() * 100;
+
+    function findOneTimeFee(temp) {
 
     }
-    function findAnnualFee(temp){
 
+    function findAnnualFee(temp) {
+
+    }
+
+    function getTotalFeeValue(temp) {
+        return totalFeeArray[temp - $scope.contStartYear];
+    }
+
+    function PV(rate, periods, payment, future, type) {
+        // Initialize type
+        var type = (typeof type === 'undefined') ? 0 : type;
+
+        // Evaluate rate and periods (TODO: repersonalLoanace with secure expression evaluator)
+        rate = eval(rate);
+        periods = eval(periods);
+
+        // Return present value
+        if (rate === 0) {
+            return -payment * periods - future;
+        } else {
+            return (((1 - Math.pow(1 + rate, periods)) / rate) * payment * (1 + rate * type) - future) / Math.pow(1 + rate, periods);
+        }
+    }
+
+    function NPV(rate,args) {
+
+        var value = 0;
+        for (var j = 1; j < args.length; j++) {
+            value += args[j] / Math.pow(1 + rate, j);
+        }
+        return value;
     }
 
     function calculate() {
@@ -106,12 +113,13 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
             totalFeeArray = [],
             pInvestArray = [],
             pBalArray = [];
-        var oneFeeArray=[], annualFeeArray=[];    
+        var oneFeeArray = [],
+            annualFeeArray = [];
 
         for (i = 0; i < numChildren; i++) {
             childGradArray[i] = childSchoolArray[i] + childDurationArray[i] - 1;
-            oneFeeArray[i]=findOneTimeFee(100);
-            annualFeeArray[i]=findAnnualFee(100);
+            oneFeeArray[i] = findOneTimeFee(100);
+            annualFeeArray[i] = findAnnualFee(100);
         }
 
         min = $scope.begnYearInvestment;
@@ -120,24 +128,100 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
         for (i = 0; i <= diff; i++) {
             yearArray[i] = min + i;
+            totalFeeArray[i] = 0;
         }
 
+        console.log("totalFeeArray", totalFeeArray);
+
         for (i = 0; i < numChildren; i++) {
-            if (childStudyingArray[i]==true) {
-                for(j=0;j<childDurationArray[i];j++){
-                    feeArray[i][j]=annualFeeArray[j]*((1+$scope.indexlevel)^(yearArray[j]-$scope.begnYearInvestment));
+            if (childStudyingArray[i] == true) {
+                for (j = 0; j < childDurationArray[i]; j++) {
+                    feeArray[i][j] = annualFeeArray[j] * ((1 + $scope.indexlevel) ^ (yearArray[j] - $scope.begnYearInvestment));
                 }
             } else {
-                temp=childSchoolArray[i]-min;
-                feeArray[i][0]=annualFeeArray[0]+oneFeeArray[0]*((1+$scope.indexlevel)^temp);
-                for(j=1;j<=childDurationArray[i];j++){
-                    feeArray[i][j]=annualFeeArray[j]*((1+$scope.indexlevel)^(yearArray[j]-$scope.begnYearInvestment));
+                temp = childSchoolArray[i] - min;
+                feeArray[i][0] = annualFeeArray[0] + oneFeeArray[0] * ((1 + $scope.indexlevel) ^ temp);
+                for (j = 1; j <= childDurationArray[i]; j++) {
+                    feeArray[i][j] = annualFeeArray[j] * ((1 + $scope.indexlevel) ^ (j + 1));
                 }
             }
         }
 
+        console.log("feeArray 1", feeArray[0]);
+        console.log("feeArray 2", feeArray[1]);
+
+        for (i = 0; i < numChildren; i++) {
+            temp = min - childSchoolArray[i];
+            for (j = temp; j < feeArray[i].length; j++) {
+                totalFeeArray[j] = totalFeeArray[j] + feeArray[i][j];
+            }
+        }
+
+        console.log("totalFeeArray", totalFeeArray);
 
 
+        pInvestArray[0] = 50000 * (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1) + ((50000 * ((1 + portoF(Number(paymentFrequency))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1));
+        pBalArray[0] = 50000 + 5000 + pInvestArray[0] - totalFeeArray[0];
+
+        for (i = 1; i < yearArray.length; i++) {
+            pInvestArray[i] = pBalArray[i - 1] * (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1) + ((pBalArray[i - 1] * ((1 + portoF(Number(paymentFrequency))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1))
+            pBalArray[i] = pBalArray[i - 1] + 5000 + pInvestArray[i] - totalFeeArray[i];
+        }
+
+        console.log("pInvestArray", pInvestArray);
+        console.log("pBalArray", pBalArray);
+
+
+        From which year your are going to contribute into the portfolio ? 2016 // $scope.contStartYear
+
+        childSchoolStart = childSchoolArray[0];
+        for (i = 1; i < childSchoolArray.length; i++) {
+            childSchoolStart = childSchoolStart > childSchoolArray[i] ? childSchoolArray[i] : childSchoolStart;
+        }
+
+        totalSchoolYears = max - childSchoolStart;
+
+        console.log("childSchoolStart", childSchoolStart);
+        console.log("totalSchoolYears", totalSchoolYears);
+
+
+        rateOfReturn = portAnnualReturn[Number(paymentFrequency)];
+
+        expctdPrsntValue=NPV(rateOfReturn,totalFeeArray) * (1+rateOfReturn)^($scope.contStartYear-$scope.begnYearInvestment);
+
+        estmtdAnnualCont = expctdPrsntValue / (Math.abs(PV(rateOfReturn, childSchoolStart + totalSchoolYears - 1 - $scope.contStartYear + 1, 1, 0, 0)));
+
+        console.log("rateOfReturn", rateOfReturn);
+        console.log("totalSchoolYears", expctdPrsntValue);
+        console.log("totalSchoolYears", estmtdAnnualCont);
+
+
+
+
+
+        var q = childSchoolStart + totalSchoolYears - 1 - $scope.contStartYear + 1;
+
+         console.log("q", q);
+
+        for (i = 1; i <= q; i++) {
+            dataYearArray[i - 1] = $scope.contStartYear + i - 1;
+            dataContribMoney[i - 1] = estmtdAnnualCont;
+            dataCashFlow[i - 1] = getTotalFeeValue(dataYearArray[i - 1]);
+            if ((i - 1) == 0) {
+                dataInvestReturn[i - 1] = 0;
+                dataPortBalance[i - 1] = dataContribMoney[i - 1] - dataCashFlow[i - 1] + dataInvestReturn[i - 1];
+            } else {
+                dataInvestReturn[i - 1] = dataPortBalance[i - 2] * rateOfReturn;
+                dataPortBalance[i - 1] = dataPortBalance[i - 1] + dataContribMoney[i - 1] - dataCashFlow[i - 1] + dataInvestReturn[i - 1];
+            }
+
+        }
+
+        console.log("dataYearArray", dataYearArray);
+        console.log("dataContribMoney", dataContribMoney);
+        console.log("dataCashFlow", dataCashFlow);
+        console.log("dataInvestReturn", dataInvestReturn);
+        console.log("dataPortBalance", dataPortBalance);
 
     }
 
