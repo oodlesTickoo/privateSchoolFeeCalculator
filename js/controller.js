@@ -5,854 +5,6 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         return target.split(search).join(replacement);
     };
 
-//     $scope.schoolNames = ["Sydney Grammar School Darlinghurst",
-//     "PLC Sydney",
-//     "SCEGGS Darlinghurst",
-//     "The Scotts College Sydney",
-//     "Pymble Ladies College",
-//     "Ascham School",
-//     "Abbotsleigh",
-//     "St Aloysius College",
-//     "Meridan School",
-//     "Sydney Church of England Grammar School (SHORE)",
-//     "Cranbrook School",
-//     "Knox Grammar School",
-//     "The Kings School",
-//     "ST Ignatius' College",
-//     "St Joseph's College ",
-//     "Loreto Normanhurst",
-//     "Loreto Kirribilli",
-//     "Queenswood School for Girls",
-//     "Roseville College",
-//     "Parramatta Marist High School",
-//     "Barker College",
-//     "Ruyton Girls' School, Kew.",
-//     "Shelford Girls' Grammar, Caulfield.",
-//     "Fintona Girls' School, Balwyn.",
-//     "Lauriston Girls' School, Aramadale.",
-//     "Loreto Mandeville Hall, Toorak.",
-//     "Prebyterian Ladies' College, Burwood.",
-//     "Camberwell Girls' Grammar School, Canterbury.",
-//     "Melbourne Girls Grammar School, South Yarra.",
-//     "Mentone Girls' Grammar School, Mentone.",
-//     "Korowa Anglican Girls' School Glen Iris.",
-//     "Camberwell Grammar School, Canterbury.",
-//     "Scotch College, Hawthorn. ",
-//     "Melbourne Grammar School, South Yarra.",
-//     "Caulfield Grammar School, St Kilda",
-//     "Haileybury College, Keysborough.",
-//     "Xavier College, Kew.",
-//     "Trinity Grammar School, Kew.",
-//     "St Kevin's College, Toorak.",
-//     "Brighton Grammar School, Brighton",
-//     "Firbank Grammar School, Brighton",
-//     "St Leonard's College, Brighton East.",
-//     "Brisbane Grammar School",
-//     "Brisbane Girls Grammer School",
-//     "Ormiston College",
-//     "Somerville House",
-//     "Brisbane Boys College",
-//     "St Aidan's Anglican Girls School",
-//     "Anglican Church Grammar School",
-//     "Clayfield College",
-//     "Cannon Hill Anglican College",
-//     "Sheldon College",
-//     "St Margarets Anglican Girls School",
-//     "Hillbrook Anglican School",
-//     "st peters lutheran college",
-//     "Moreton Bay College",
-//     "St Rita's College, Clayfield",
-//     "The Southport School",
-//     "St Joseph's College Gregory Terrace",
-//     "The Lakes College",
-//     "Redeemer Lutheran College",
-//     "Moreton Bay Boys College",
-//     "Wilderness School, Medindie.",
-//     "St Peter's College ",
-//     "St Peter's Girls Collegiate Girls' School",
-//     "Walford Anglican School for Girls",
-//     "Prince Alfred College",
-//     "Seymour College",
-//     "Pulteney Grammar School",
-//     "St Aloysius College, Adelaide",
-//     "St Dominics Priory College",
-//     "St John's Grammar School",
-//     "Woodcroft College",
-//     "St Ignatious College, Adelaide",
-//     "Pedare Christian College",
-//     "Westminster School",
-//     "Kings Baptist Grammar School",
-//     "Scotch College Adelaide",
-//     "Concordia College",
-//     "Pembroke School",
-//     "Loreto College, Marryatville",
-//     "Trinity College, Gawler",
-//     "Hale School",
-//     "Christ Church Grammar School",
-//     "All Saints College",
-//     "St Mary's Anglican Girls School",
-//     "St Hilda's Anglican Girls School",
-//     "Presbyterian Ladies' College, Perth",
-//     "Perth College",
-//     "Guildford Grammar School ",
-//     "Penrhos College",
-//     "Scotch College, Perth",
-//     "John XXIII College, Perth",
-//     "Santa Maria College",
-//     "Wesley College, Perth",
-//     "Methodist Ladies College, Perth",
-//     "St Marks Anglican Community School",
-//     "Aquinas College, Perth",
-//     "Trinity College, Perth",
-//     "Sacred Heart College",
-//     "Newman College Perth",
-//     "Kingsway Christian College",
-//     "Canberra Grammar School",
-//     "Radford College",
-//     "Canberra Girls Grammar School",
-//     "Burgmann Anglican School",
-//     "Brindabella Christian College",
-//     "Marist College",
-//     "Orana Steiner School",
-//     "Merici College",
-//     "Emmaus Christian School",
-//     "The Friends School, Hobart",
-//     "Fahan School",
-//     "St Michael's Collegiate School",
-//     "The Hutchins School",
-//     "St Mary's College, Hobart",
-//     "Launceston Chruch Grammar School",
-//     "Launceston Christian School"
-// ];
-
-// var schoolAddress = ["College St- Darlinghurst NSW 2010",
-//     "Boundary St- Croydon NSW 2132",
-//     "215 Forbes St- Darlinghurst NSW 2010",
-//     "Victoria Rd- Bellevue Hill NSW 2023",
-//     "Avon Rd- Pymble NSW 2073",
-//     "188 New South Head Rd- Edgecliff- NSW 2027",
-//     "1666 Pacific Highway- Wahroonga- NSW 2076",
-//     "47 Upper Pitt Street- Milsons Point 2061 NSW Australia",
-//     "10-12 Redmyre Road- Strathfield NSW 2135",
-//     "Blue Street- North Sydney- NSW- 2060- Australia",
-//     "5 Victoria Road- Bellevue Hill NSW 2023 Australia",
-//     "7 Woodville Ave- Wahroonga 2076 NSW Australia",
-//     "87-129 PENNANT HILLS ROAD- NORTH PARRAMATTA- NSW 2151- AUSTRALIA",
-//     "1 Tambourine Bay Road- NSW Lane Cove",
-//     "Mark Street- Hunters Hill- NSW 2110",
-//     "91-93 Pennant Hills Road- Normanhurst- Sydney- NSW 2076",
-//     "85 Carabella Street- Kirribilli NSW 2061- Australia",
-//     "47 Mandolong Rd- Mosman NSW 2088",
-//     "27 Bancroft Avenue Roseville NSW 2069 Australia",
-//     "2 DARCY ROAD- WESTMEAD NSW AUSTRALIA 2145",
-//     "91 Pacific Highway Hornsby NSW 2077",
-//     "12 Selbourne Rd- Kew VIC 3101",
-//     "3 Hood Cres- Caulfield VIC 3161",
-//     "79 Balwyn Rd- Balwyn VIC 3103",
-//     "38 Huntingtower Rd- Armadale VIC 3143",
-//     "10 Mandeville Cres- Toorak VIC 3142",
-//     "141 Burwood Hwy- Burwood VIC 3125",
-//     " 2 Torrington St- Canterbury VIC 3126",
-//     "86 Anderson St- South Yarra VIC 3141",
-//     "11 Mentone Parade- Mentone VIC 3194",
-//     "10-16 Ranfurlie Cres- Glen Iris VIC 3146",
-//     "55 Mont Albert Rd- Canterbury VIC 3126",
-//     "1 Morrison St- Hawthorn VIC 3122",
-//     "355 St Kilda Rd- Melbourne VIC 3004",
-//     "217 Glen Eira Road- East St. Kilda- Melbourne- Victoria 3183",
-//     "855 Springvale Road Keysborough VIC 3173",
-//     "135 Barkers Road- Melbourne- Kew- Victoria",
-//     "40 Charles St- Kew- Melbourne Victoria 3101",
-//     "31 Moonga Rd- Toorak VIC 3142",
-//     "90 Outer Cres- Brighton VIC 3186",
-//     "51 Outer Crescent- Brighton VIC 3186",
-//     "163 South Road- Brighton East VIC 3187",
-//     "24 Gregory Terrace- Spring Hill QLD 4000",
-//     "70 Gregory Terrace- Spring Hill QLD 4000",
-//     "97 Dundas St W- Ormiston QLD 4160",
-//     "17 Graham St- South Brisbane QLD 4101",
-//     "Kensington Terrace- Toowong QLD 4066",
-//     "11 Ruthven St- Corinda QLD 4075",
-//     "Oaklands Parade- East Brisbane QLD 4169",
-//     "23 Gregory Street- Clayfield QLD 4011",
-//     "Junction Rd- Cannon Hill QLD 4170",
-//     "Taylor Road- Sheldon- QLD 4157",
-//     "11 Petrie St- Ascot QLD 4007",
-//     "45 Hurdcotte Street Enoggera QLD 4051",
-//     "66 Harts Rd- Indooroopilly QLD 4068",
-//     "450 Wondall Rd- Manly West QLD 4179",
-//     "41 Enderley Rd- Clayfield QLD 4011",
-//     "2 Winchester St- Southport QLD 4215",
-//     "Gregory Terrace- Brisbane- QLD 4000- Australia",
-//     "2 College St- North Lakes QLD 4509",
-//     "745 Rochedale Rd- Rochedale QLD 4123",
-//     "302 Manly Rd- Manly West QLD 4179",
-//     "30 Hawkers Rd- Medindie SA 5081",
-//     "57 Hackney Rd- Hackney SA 5069",
-//     "Stonyfell Rd- Stonyfell SA 5066",
-//     "316 Unley Rd- Hyde Park SA 5061",
-//     "23 Dequetteville Terrace- Kent Town SA 5067",
-//     "546 Portrush Rd- Glen Osmond SA 5064",
-//     "190 South Terrace ADELAIDE SA 5000",
-//     "53 Wakefield St- Adelaide SA 5000",
-//     "119/139 Molesworth St- North Adelaide SA 5006",
-//     "29 Gloucester Ave- Belair SA 5052",
-//     "143-173 Bains Rd- Morphett Vale SA 5162",
-//     "2 Manresa Ct- Athelstone SA 5076",
-//     "2-30 Surrey Farm Dr- Golden Grove SA 5125",
-//     "1-27 Alison Avenue- Marion- South Australia ",
-//     "no address",
-//     "Carruth Road- Torrens Park South Australia 5062",
-//     "45 Cheltenham St- Highgate SA 5063",
-//     "342 The Parade- Kensington Park SA 5068",
-//     "316 Portrush Rd- Marryatville SA 5068",
-//     "Alexander Ave- Evanston South SA 5116",
-//     "160 Hale Rd- Wembley Downs WA 6019",
-//     "Queenslea Dr- Claremont WA 6010",
-//     "Ewing Ave.- Bull Creek WA 6149",
-//     "75 Elliott Rd- Karrinyup WA 6018",
-//     "26 Bay View Terrace- Mosman Park WA 6012",
-//     "14 McNeil St- Peppermint Grove WA 6011",
-//     "31 Lawley Crescent- Mount Lawley WA 6050",
-//     "11 Terrace Rd- Guildford WA 6055",
-//     "6 Morrison Street- Como WA 6152",
-//     "76 Shenton Rd- Swanbourne WA 6010",
-//     "Mooro Dr- Mount Claremont WA 6010",
-//     "18 Stoneham Rd- Attadale WA 6156",
-//     "40 Coode St- South Perth WA 6151",
-//     "356 Stirling Hwy- Claremont WA 6010",
-//     "St Marks Dr- Hillarys WA 6025",
-//     "58 Mount Henry Rd- Salter Point WA 6152",
-//     "2 Trinity Ave- East Perth WA 6004",
-//     "Hocking Parade- Sorrento WA 6020",
-//     "216 Empire Ave- Churchlands WA 6018",
-//     "157 Kingsway- Darch WA 6065",
-//     "40 Monaro Cres- Red Hill ACT 2603",
-//     "1 College St- Bruce ACT 2617",
-//     "Melbourne Ave- Deakin ACT 2600",
-//     "Gungahlin Dr & The Valley Avenue- Gungahlin ACT 291",
-//     "136 Brigalow St- Lyneham ACT 2602",
-//     "27 Marr St- Pearce ACT 2607",
-//     "Unwin Place- ACT 2611",
-//     "Wise St- Braddon ACT 2612",
-//     "73 Davenport St- Dickson ACT 2602",
-//     "23 Commercial Rd- North Hobart TAS 7000",
-//     "Fisher Avenue- Lower Sandy Bay TAS 7005",
-//     "218 Macquarie St- Hobart TAS 7000",
-//     "71 Nelson Rd- Sandy Bay TAS 7005",
-//     "164 Harrington St- Hobart TAS 7000",
-//     "36 Button St- Mowbray TAS 7248",
-//     " 452A W Tamar Hwy- Riverside TAS 7250"
-// ];
-
-// var schoolState = ["NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "NSW",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "VIC",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "QLD",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "SA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "WA",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "ACT",
-//     "TAS",
-//     "TAS",
-//     "TAS",
-//     "TAS",
-//     "TAS",
-//     "TAS",
-//     "TAS"
-// ];
-
-// var schoolRegtn = [5489,
-//     3415,
-//     4950,
-//     5500,
-//     3430,
-//     0,
-//     0,
-//     2650,
-//     1825,
-//     2400,
-//     7300,
-//     3000,
-//     3850,
-//     4530,
-//     3300,
-//     3330,
-//     3220,
-//     4220,
-//     1220,
-//     0,
-//     3800,
-//     1610,
-//     1100,
-//     1150,
-//     1100,
-//     1900,
-//     1300,
-//     1100,
-//     1650,
-//     1100,
-//     900,
-//     1330,
-//     1600,
-//     3900,
-//     2100,
-//     2500,
-//     945,
-//     2360,
-//     3000,
-//     2200,
-//     1100,
-//     1800,
-//     2550,
-//     2040,
-//     795,
-//     1530,
-//     1960,
-//     1300,
-//     1930,
-//     1135,
-//     1250,
-//     660,
-//     1220,
-//     1610,
-//     1100,
-//     1100,
-//     1100,
-//     1500,
-//     2420,
-//     500,
-//     700,
-//     1100,
-//     1050,
-//     2600,
-//     970,
-//     1095,
-//     1100,
-//     1050,
-//     850,
-//     600,
-//     0,
-//     688,
-//     755,
-//     975,
-//     150,
-//     800,
-//     175,
-//     1150,
-//     75,
-//     860,
-//     745,
-//     540,
-//     8250,
-//     6700,
-//     5423.25,
-//     5545,
-//     4959,
-//     4950,
-//     5742,
-//     2925,
-//     5489,
-//     6687,
-//     2110,
-//     1020,
-//     7276,
-//     5320,
-//     2030,
-//     2832,
-//     2243,
-//     805,
-//     1110,
-//     1320,
-//     2975,
-//     950,
-//     150,
-//     875,
-//     700,
-//     400,
-//     550,
-//     50,
-//     300,
-//     1200,
-//     2100,
-//     1110,
-//     1610,
-//     0,
-//     100,
-//     1300
-// ];
-
-// var schoolUpfrontF = [5489,
-//     3415,
-//     4950,
-//     5500,
-//     3430,
-//     6300,
-//     1970,
-//     2650,
-//     1825,
-//     2400,
-//     7300,
-//     3000,
-//     3850,
-//     4530,
-//     3300,
-//     3330,
-//     3220,
-//     4220,
-//     1220,
-//     1220,
-//     3800,
-//     1610,
-//     1100,
-//     1150,
-//     1100,
-//     1900,
-//     1300,
-//     1100,
-//     1650,
-//     1100,
-//     900,
-//     1330,
-//     1600,
-//     3900,
-//     2100,
-//     2500,
-//     945,
-//     2360,
-//     3000,
-//     2200,
-//     1100,
-//     1800,
-//     2550,
-//     2040,
-//     795,
-//     1530,
-//     1960,
-//     1300,
-//     1930,
-//     1135,
-//     1250,
-//     660,
-//     1220,
-//     1610,
-//     1100,
-//     1100,
-//     1100,
-//     1500,
-//     2420,
-//     500,
-//     700,
-//     1100,
-//     1050,
-//     2600,
-//     970,
-//     1095,
-//     1100,
-//     1050,
-//     850,
-//     600,
-//     0,
-//     688,
-//     755,
-//     975,
-//     150,
-//     800,
-//     175,
-//     1150,
-//     75,
-//     860,
-//     745,
-//     540,
-//     8250,
-//     6700,
-//     5423,
-//     5545,
-//     4959,
-//     4950,
-//     5742,
-//     2925,
-//     5489,
-//     6687,
-//     2110,
-//     1020,
-//     7276,
-//     5320,
-//     2030,
-//     2832,
-//     2243,
-//     805,
-//     1110,
-//     1320,
-//     2975,
-//     950,
-//     150,
-//     875,
-//     700,
-//     400,
-//     550,
-//     50,
-//     300,
-//     1200,
-//     2100,
-//     1110,
-//     1610,
-//     0,
-//     100,
-//     1300
-// ];
-
-// var schoolAnnualF = [32644,
-//     24411,
-//     28348,
-//     33925,
-//     24002,
-//     32000,
-//     28640,
-//     16278,
-//     28340,
-//     24126,
-//     28325,
-//     29430,
-//     25345,
-//     23880,
-//     29040,
-//     19179,
-//     15645,
-//     25171,
-//     20735,
-//     4473,
-//     25140,
-//     22360,
-//     25518,
-//     20399,
-//     27160,
-//     22398,
-//     23479,
-//     19051,
-//     27746,
-//     22354,
-//     27138,
-//     25600,
-//     29912,
-//     24885,
-//     23789,
-//     24702,
-//     21957,
-//     26349,
-//     16290,
-//     25247,
-//     24769,
-//     23415,
-//     23000,
-//     22520,
-//     2527,
-//     18292,
-//     18434,
-//     17272,
-//     18813,
-//     17031,
-//     10386,
-//     11479,
-//     17762,
-//     11092,
-//     15806,
-//     12532,
-//     7120,
-//     15030,
-//     8215,
-//     8415,
-//     8979,
-//     11023,
-//     18888,
-//     20520,
-//     17285,
-//     19301,
-//     17319,
-//     19679,
-//     18946,
-//     7636,
-//     6674,
-//     11811,
-//     6297,
-//     14013,
-//     7502,
-//     17932,
-//     0,
-//     19668,
-//     8820,
-//     19690,
-//     14664,
-//     4622,
-//     21450,
-//     23088,
-//     16534,
-//     18394,
-//     20284,
-//     20982,
-//     18701,
-//     18073,
-//     19442,
-//     23499,
-//     7710,
-//     10521,
-//     20001,
-//     21203,
-//     7251,
-//     14013,
-//     13602,
-//     8220,
-//     5715,
-//     7288,
-//     18753,
-//     12307,
-//     16942,
-//     8413,
-//     5874,
-//     8644,
-//     6467,
-//     6277,
-//     6292,
-//     14254,
-//     12412,
-//     12908,
-//     13400,
-//     3958,
-//     12900,
-//     4802
-// ];
-
-// var schoolTuitionF = [32644.00,
-//     24360.00,
-//     28348.15,
-//     33925.00,
-//     24001.9230769231,
-//     32000.00,
-//     0.00,
-//     16278.40,
-//     28340.00,
-//     24126.15,
-//     28325.08,
-//     29430.00,
-//     25345.07,
-//     23880.00,
-//     29040.00,
-//     19179.00,
-//     15645.00,
-//     25170.77,
-//     20735.38,
-//     4473.00,
-//     24959.23,
-//     22360,
-//     25518,
-//     20399.1428571429,
-//     27159.5,
-//     22397.7692307692,
-//     23479.3846153846,
-//     19051.3076923077,
-//     27746.1538461538,
-//     22354.4615384615,
-//     27138,
-//     25600,
-//     29911.5,
-//     24884.6153846154,
-//     23789.3076923077,
-//     24702.3076923077,
-//     21956.6923076923,
-//     26348.6153846154,
-//     16290,
-//     25246.8461538462,
-//     24768.9230769231,
-//     23414.7692307692,
-//     23000,
-//     22520,
-//     2527.2307692308,
-//     18292.3076923077,
-//     18434.1538461538,
-//     17272,
-//     18812.6153846154,
-//     17030.7692307692,
-//     10385.5384615385,
-//     11479,
-//     17762.1538461538,
-//     11092,
-//     15806.1538461538,
-//     12531.9230769231,
-//     7120,
-//     15029.5846153846,
-//     8215.3846153846,
-//     8414.7692307692,
-//     8979.2307692308,
-//     11023.0769230769,
-//     18887.5384615385,
-//     20520,
-//     17284.6153846154,
-//     19301.1538461538,
-//     17319.2307692308,
-//     19679.2307692308,
-//     18946.1538461538,
-//     7636.0769230769,
-//     6673.8461538462,
-//     11811.4615384615,
-//     6297.3076923077,
-//     14013.2307692308,
-//     7502.1538461539,
-//     17932,
-//     0,
-//     19667.6923076923,
-//     8820.3076923077,
-//     19689.6923076923,
-//     14664.2307692308,
-//     4621.6153846154,
-//     21450,
-//     23087.6923076923,
-//     16534.2307692308,
-//     18393.8461538462,
-//     20283.5384615385,
-//     20981.8461538461,
-//     18700.6153846154,
-//     18072.6923076923,
-//     19441.9230769231,
-//     23499.0769230769,
-//     7710,
-//     10520.625,
-//     20001,
-//     21203.0769230769,
-//     7250.7692307692,
-//     14013,
-//     13601.6666666667,
-//     8219.5,
-//     5714.6153846154,
-//     7288.0769230769,
-//     18753.0769230769,
-//     12306.9230769231,
-//     16941.5384615385,
-//     8413.4615384615,
-//     5873.8461538462,
-//     8644,
-//     6467.3076923077,
-//     6277.1428571429,
-//     6291.8181818182,
-//     14253.85,
-//     12412.31,
-//     12907.69,
-//     13400.00,
-//     3957.69,
-//     12900.00,
-//     4801.54
-// ];
-
-// for(var i=0; i <$scope.schoolNames.length;i++){
-//     console.log(
-//         "{ id: " + i + ", name: '" + $scope.schoolNames[i] + "', address: '" + schoolAddress[i] + 
-//         "', state: '" + schoolState[i] + "', regFees:" + schoolRegtn[i] + ", upfrontFee:" + schoolUpfrontF[i] +
-//         ", annualFee:" + schoolAnnualF[i] + ", tuitionFee:" + schoolTuitionF[i] + " }"  
-//         );
-// }
-
 $scope.schoolObjects=[
  { id: 0, name: 'Sydney Grammar School Darlinghurst', address: 'College St- Darlinghurst NSW 2010', state: 'NSW', regFees:5489, upfrontFee:5489, annualFee:32644, tuitionFee:32644 }
 ,{ id: 1, name: 'PLC Sydney', address: 'Boundary St- Croydon NSW 2132', state: 'NSW', regFees:3415, upfrontFee:3415, annualFee:24411, tuitionFee:24360 }
@@ -1472,47 +624,22 @@ $scope.schoolObjects=[
 
     $scope.indexlevel = 0.04;
 
-    // $scope.grossAnnualIncome = 120000;
-    // $scope.homeMortgage = 500000;
-    // $scope.investmentPropertyMortgage = 0;
-    // $scope.creditCardDebt = 2000;
-    // $scope.carLoan = 20000;
-    // $scope.personalLoan = 0;
-    // $scope.otherLoan = 0;
-    // $scope.homeValue = 800000;
-    // $scope.cashAtBank = 20000;
-    // $scope.otherInvestment = 20000;
-    // $scope.superBalance = 100000;
-    // $scope.ecLife = 250000;
-    // $scope.ecTPD = 0;
-    // $scope.ecIP = 0;
-    // $scope.ecTrauma = 0;
-    // $scope.numChildren = 2;
-    // $scope.funeralCost = 20000;
-    // $scope.educationExpensePerYearPerChild = 5000;
-    // $scope.familyLivingCostPerYear = 90000;
-    // $scope.inflation = 2;
-    // $scope.rateOfReturn = 5;
-    // $scope.moneyToBeBorrowed = 400000;
-    // $scope.valueOfNewProperty = 500000;
-    // $scope.ageSpouse = 47;
-    // $scope.spouseSalary = 50000;
-    // $scope.ageChildren1 = 3;
-    // $scope.ageChildren2 = 5;
-    // $scope.ageChildren3 = 10;
-    // $scope.ageChildren4 = 10;
-    // $scope.ageChildren5 = 10;
-    // $scope.ageChildren6 = 10;
-    // $scope.ageChildren7 = 10;
-    // $scope.ageChildren8 = 10;
+        var paymentFrequency = "0";
+    $timeout(function() {
+        $('.selectpicker').selectpicker({
+            style: 'btn-info',
+            size: 2,
+        });
+        $('.selectpicker option[value="0"]').attr("selected", true);
+        $('.selectpicker').selectpicker('refresh');
+    });
 
 
-    // $scope.genderOption = true;
-    // $scope.spouseOption = true;
-    // $scope.smokeOption = false;
-    // $scope.spouseWorkOption = true;
-    // $scope.buyOption = true;
-
+    $('.selectpicker').on('change', function() {
+        paymentFrequency = $('.selectpicker option:selected').val();
+        console.log("paymentFrequency", paymentFrequency)
+        $timeout(0);
+    });
 
     $scope.studyingOption1Change = function(studying1) {
         $scope.studyingOption1 = studying1;
@@ -1549,12 +676,45 @@ $scope.schoolObjects=[
         { id: 5, name: "Select your own investment return" },
     ];
 
+    $scope.portAnnualReturn = [0.0456, 0.0655, 0.0853, 0.1009, 0.1165, 0.06];
+    $scope.sd = [0.05, 0.06, 0.07, 0.08, 0.09, 0.02];
+    $scope.simProb = Math.random() * 100;
+
     function findOneTimeFee(temp) {
 
     }
 
     function findAnnualFee(temp) {
 
+    }
+
+    function getTotalFeeValue(temp) {
+        return totalFeeArray[temp - $scope.contStartYear];
+    }
+
+    function PV(rate, periods, payment, future, type) {
+        // Initialize type
+        var type = (typeof type === 'undefined') ? 0 : type;
+
+        // Evaluate rate and periods (TODO: repersonalLoanace with secure expression evaluator)
+        rate = eval(rate);
+        periods = eval(periods);
+
+        // Return present value
+        if (rate === 0) {
+            return -payment * periods - future;
+        } else {
+            return (((1 - Math.pow(1 + rate, periods)) / rate) * payment * (1 + rate * type) - future) / Math.pow(1 + rate, periods);
+        }
+    }
+
+    function NPV(rate,args) {
+
+        var value = 0;
+        for (var j = 1; j < args.length; j++) {
+            value += args[j] / Math.pow(1 + rate, j);
+        }
+        return value;
     }
 
     function calculate() {
@@ -1588,7 +748,10 @@ $scope.schoolObjects=[
 
         for (i = 0; i <= diff; i++) {
             yearArray[i] = min + i;
+            totalFeeArray[i] = 0;
         }
+
+        console.log("totalFeeArray", totalFeeArray);
 
         for (i = 0; i < numChildren; i++) {
             if (childStudyingArray[i] == true) {
@@ -1599,13 +762,86 @@ $scope.schoolObjects=[
                 temp = childSchoolArray[i] - min;
                 feeArray[i][0] = annualFeeArray[0] + oneFeeArray[0] * ((1 + $scope.indexlevel) ^ temp);
                 for (j = 1; j <= childDurationArray[i]; j++) {
-                    feeArray[i][j] = annualFeeArray[j] * ((1 + $scope.indexlevel) ^ (yearArray[j] - $scope.begnYearInvestment));
+                    feeArray[i][j] = annualFeeArray[j] * ((1 + $scope.indexlevel) ^ (j + 1));
                 }
             }
         }
 
+        console.log("feeArray 1", feeArray[0]);
+        console.log("feeArray 2", feeArray[1]);
+
+        for (i = 0; i < numChildren; i++) {
+            temp = min - childSchoolArray[i];
+            for (j = temp; j < feeArray[i].length; j++) {
+                totalFeeArray[j] = totalFeeArray[j] + feeArray[i][j];
+            }
+        }
+
+        console.log("totalFeeArray", totalFeeArray);
 
 
+        pInvestArray[0] = 50000 * (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1) + ((50000 * ((1 + portoF(Number(paymentFrequency))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1));
+        pBalArray[0] = 50000 + 5000 + pInvestArray[0] - totalFeeArray[0];
+
+        for (i = 1; i < yearArray.length; i++) {
+            pInvestArray[i] = pBalArray[i - 1] * (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1) + ((pBalArray[i - 1] * ((1 + portoF(Number(paymentFrequency))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1))
+            pBalArray[i] = pBalArray[i - 1] + 5000 + pInvestArray[i] - totalFeeArray[i];
+        }
+
+        console.log("pInvestArray", pInvestArray);
+        console.log("pBalArray", pBalArray);
+
+
+        From which year your are going to contribute into the portfolio ? 2016 // $scope.contStartYear
+
+        childSchoolStart = childSchoolArray[0];
+        for (i = 1; i < childSchoolArray.length; i++) {
+            childSchoolStart = childSchoolStart > childSchoolArray[i] ? childSchoolArray[i] : childSchoolStart;
+        }
+
+        totalSchoolYears = max - childSchoolStart;
+
+        console.log("childSchoolStart", childSchoolStart);
+        console.log("totalSchoolYears", totalSchoolYears);
+
+
+        rateOfReturn = portAnnualReturn[Number(paymentFrequency)];
+
+        expctdPrsntValue=NPV(rateOfReturn,totalFeeArray) * (1+rateOfReturn)^($scope.contStartYear-$scope.begnYearInvestment);
+
+        estmtdAnnualCont = expctdPrsntValue / (Math.abs(PV(rateOfReturn, childSchoolStart + totalSchoolYears - 1 - $scope.contStartYear + 1, 1, 0, 0)));
+
+        console.log("rateOfReturn", rateOfReturn);
+        console.log("totalSchoolYears", expctdPrsntValue);
+        console.log("totalSchoolYears", estmtdAnnualCont);
+
+
+
+
+
+        var q = childSchoolStart + totalSchoolYears - 1 - $scope.contStartYear + 1;
+
+         console.log("q", q);
+
+        for (i = 1; i <= q; i++) {
+            dataYearArray[i - 1] = $scope.contStartYear + i - 1;
+            dataContribMoney[i - 1] = estmtdAnnualCont;
+            dataCashFlow[i - 1] = getTotalFeeValue(dataYearArray[i - 1]);
+            if ((i - 1) == 0) {
+                dataInvestReturn[i - 1] = 0;
+                dataPortBalance[i - 1] = dataContribMoney[i - 1] - dataCashFlow[i - 1] + dataInvestReturn[i - 1];
+            } else {
+                dataInvestReturn[i - 1] = dataPortBalance[i - 2] * rateOfReturn;
+                dataPortBalance[i - 1] = dataPortBalance[i - 1] + dataContribMoney[i - 1] - dataCashFlow[i - 1] + dataInvestReturn[i - 1];
+            }
+
+        }
+
+        console.log("dataYearArray", dataYearArray);
+        console.log("dataContribMoney", dataContribMoney);
+        console.log("dataCashFlow", dataCashFlow);
+        console.log("dataInvestReturn", dataInvestReturn);
+        console.log("dataPortBalance", dataPortBalance);
 
     }
 
