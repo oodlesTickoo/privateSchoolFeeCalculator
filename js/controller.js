@@ -126,13 +126,26 @@ $scope.schoolObjects=[
 ,{ id: 117, name: 'Launceston Christian School', address: ' 452A W Tamar Hwy- Riverside TAS 7250', state: 'TAS', regFees:1300, upfrontFee:1300, annualFee:4802, tuitionFee:4801.54 }];
     
     var school1,school2,school3,school4,school5,school6;
-
+    var spState = "0";
+    var spPort = "0";
     school1 = $scope.schoolObjects[0];
     school2 = $scope.schoolObjects[0];
     school3 = $scope.schoolObjects[0];
     school4 = $scope.schoolObjects[0];
     school5 = $scope.schoolObjects[0];
     school6 = $scope.schoolObjects[0];
+
+    $('.spState').on('change', function() {
+        spState = $('.spState option:selected').val();
+        console.log("spState", spState)
+        $timeout(0);
+    });
+
+    $('.spPort').on('change', function() {
+        spPort = $('.spPort option:selected').val();
+        console.log("spPort", spPort)
+        $timeout(0);
+    });
 
     $('.sp1').on('change', function() {
         school1 = $('.sp1 option:selected').val();
@@ -624,22 +637,14 @@ $scope.schoolObjects=[
 
     $scope.indexlevel = 0.04;
 
-        var paymentFrequency = "0";
-    $timeout(function() {
-        $('.selectpicker').selectpicker({
-            style: 'btn-info',
-            size: 2,
-        });
-        $('.selectpicker option[value="0"]').attr("selected", true);
-        $('.selectpicker').selectpicker('refresh');
-    });
 
 
-    $('.selectpicker').on('change', function() {
-        paymentFrequency = $('.selectpicker option:selected').val();
-        console.log("paymentFrequency", paymentFrequency)
-        $timeout(0);
-    });
+
+
+
+
+    
+
 
     $scope.studyingOption1Change = function(studying1) {
         $scope.studyingOption1 = studying1;
@@ -780,11 +785,11 @@ $scope.schoolObjects=[
         console.log("totalFeeArray", totalFeeArray);
 
 
-        pInvestArray[0] = 50000 * (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1) + ((50000 * ((1 + portoF(Number(paymentFrequency))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1));
+        pInvestArray[0] = 50000 * (((1 + $scope.portAnnualReturn(Number(spPort))) ^ 0.5) - 1) + ((50000 * ((1 + $scope.portAnnualReturn(Number(spPort))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + $scope.portAnnualReturn(Number(spPort))) ^ 0.5) - 1));
         pBalArray[0] = 50000 + 5000 + pInvestArray[0] - totalFeeArray[0];
 
         for (i = 1; i < yearArray.length; i++) {
-            pInvestArray[i] = pBalArray[i - 1] * (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1) + ((pBalArray[i - 1] * ((1 + portoF(Number(paymentFrequency))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + portoF(Number(paymentFrequency))) ^ 0.5) - 1))
+            pInvestArray[i] = pBalArray[i - 1] * (((1 + $scope.portAnnualReturn(Number(spPort))) ^ 0.5) - 1) + ((pBalArray[i - 1] * ((1 + $scope.portAnnualReturn(Number(spPort))) ^ 0.5) + 5000 - totalFeeArray[0]) ^ (((1 + $scope.portAnnualReturn(Number(spPort))) ^ 0.5) - 1))
             pBalArray[i] = pBalArray[i - 1] + 5000 + pInvestArray[i] - totalFeeArray[i];
         }
 
@@ -792,7 +797,7 @@ $scope.schoolObjects=[
         console.log("pBalArray", pBalArray);
 
 
-        From which year your are going to contribute into the portfolio ? 2016 // $scope.contStartYear
+        //From which year your are going to contribute into the portfolio ? 2016 // $scope.contStartYear
 
         childSchoolStart = childSchoolArray[0];
         for (i = 1; i < childSchoolArray.length; i++) {
@@ -805,7 +810,7 @@ $scope.schoolObjects=[
         console.log("totalSchoolYears", totalSchoolYears);
 
 
-        rateOfReturn = portAnnualReturn[Number(paymentFrequency)];
+        rateOfReturn = $scope.portAnnualReturn[Number(spPort)];
 
         expctdPrsntValue=NPV(rateOfReturn,totalFeeArray) * (1+rateOfReturn)^($scope.contStartYear-$scope.begnYearInvestment);
 
