@@ -41,7 +41,7 @@
                         <form name="ttrForm" class="ttr-form" novalidate ng-submit="submitForm(ttrForm.$valid)">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 form-heading">
-                                    Beginning of the year of investment
+                                    Beginning of the year of analysis
                                     <div class="row">
                                         <div class="col-xs-4 col-sm-4">
                                             <div class="form-group">
@@ -108,8 +108,22 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <!-- <label></label> -->
                                             <div id="investmentVolatilitySlider" style="margin-top:8px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 form-heading">
+                                    From which year your are going to contribute into the portfolio?
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <div class="form-group">
+                                                <input type="text" onClick="this.select();" class="form-control" id="contStartYearInput" name="contStartYearInput" ng-model="contStartYear">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                            <div id="contStartYearSlider" style="margin-top:8px;"></div>
                                         </div>
                                     </div>
                                 </div>

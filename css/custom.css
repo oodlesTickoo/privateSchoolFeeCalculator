@@ -1002,3 +1002,8 @@ hr.children-hr{
   margin-right:-15px;
   border-top:1px solid #ccc;
 }
+
+
+.optionDrop{
+    display: none;
+}
