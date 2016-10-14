@@ -155,8 +155,6 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
     $scope.indexlevel = 0.04;
 
     $scope.portAnnualReturn = [0.0456, 0.0655, 0.0853, 0.1009, 0.1165, 0.06];
-    $scope.sd = [0.05, 0.06, 0.07, 0.08, 0.09, 0.02];
-    $scope.simProb = Math.random() * 100;
 
     var spState = "0",
         spPort = "0",
@@ -168,7 +166,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         school6 = "0";
     var schoolArray = [school1, school2, school3, school4, school5, school6];
 
-$scope.showPortfolioOption = false;
+    $scope.showPortfolioOption = false;
     $('.spState').on('change', function() {
         spState = $('.spState option:selected').val();
         console.log("spState", spState)
@@ -177,9 +175,9 @@ $scope.showPortfolioOption = false;
 
     $('.spPort').on('change', function() {
         spPort = $('.spPort option:selected').val();
-        if(spPort=="5"){
+        if (spPort == "5") {
             $scope.showPortfolioOption = true;
-        }else{
+        } else {
             $scope.showPortfolioOption = false;
         }
         console.log("spPort", spPort)
@@ -189,58 +187,58 @@ $scope.showPortfolioOption = false;
     $('.sp1').on('change', function() {
         schoolArray[0] = $('.sp1 option:selected').val();
         console.log("schoolArray[0]", schoolArray[0])
-            // calculateFinal();
+        calculateFinal();
     });
 
     $('.sp2').on('change', function() {
         schoolArray[1] = $('.sp2 option:selected').val();
         console.log("schoolArray[1]", schoolArray[1])
-            // calculateFinal();
+        calculateFinal();
     });
 
     $('.sp3').on('change', function() {
         schoolArray[2] = $('.sp3 option:selected').val();
         console.log("schoolArray[2]", schoolArray[2])
-            // calculateFinal();
+        calculateFinal();
     });
 
     $('.sp4').on('change', function() {
         schoolArray[3] = $('.sp4 option:selected').val();
         console.log("schoolArray[3]", schoolArray[3])
-            // calculateFinal();
+        calculateFinal();
     });
 
     $('.sp5').on('change', function() {
         schoolArray[4] = $('.sp5 option:selected').val();
         console.log("schoolArray[4]", schoolArray[4])
-            // calculateFinal();
+        calculateFinal();
     });
 
     $('.sp6').on('change', function() {
         schoolArray[5] = $('.sp6 option:selected').val();
         console.log("schoolArray[5]", schoolArray[5])
-            // calculateFinal();
+        calculateFinal();
     });
 
-
-
-    $scope.begnYearInvestment = 2015;
+    var initDate = new Date();
+    $scope.begnYearInvestment = initDate.getFullYear();
     $scope.numChildren = 2;
     $scope.investmentReturn = 5000;
     $scope.investmentVolatility = 5000;
-    $scope.contStartYear = 2016;
-    $scope.schoolYear1 = 2016;
+    $scope.contStartYear = initDate.getFullYear();;
+    $scope.schoolYear1 = initDate.getFullYear();;
     $scope.schoolDuration1 = 8;
-    $scope.schoolYear2 = 2022;
+    $scope.schoolYear2 = initDate.getFullYear();;
     $scope.schoolDuration2 = 10;
-    $scope.schoolYear3 = 2017;
+    $scope.schoolYear3 = initDate.getFullYear();;
     $scope.schoolDuration3 = 10;
-    $scope.schoolYear4 = 2017;
+    $scope.schoolYear4 = initDate.getFullYear();;
     $scope.schoolDuration4 = 10;
-    $scope.schoolYear5 = 2017;
+    $scope.schoolYear5 = initDate.getFullYear();;
     $scope.schoolDuration5 = 10;
-    $scope.schoolYear6 = 2017;
+    $scope.schoolYear6 = initDate.getFullYear();;
     $scope.schoolDuration6 = 10;
+    $scope.endYearInvestment = Number($scope.schoolYear2) + Number($scope.schoolDuration2)
 
     var begnYearInvestmentSlider = document.getElementById("begnYearInvestmentSlider"),
         contStartYearSlider = document.getElementById("contStartYearSlider"),
@@ -282,8 +280,8 @@ $scope.showPortfolioOption = false;
         start: $scope.begnYearInvestment,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2022],
+            min: [initDate.getFullYear()],
+            max: [$scope.endYearInvestment],
         },
         format: wNumb({
             decimals: 0,
@@ -295,8 +293,8 @@ $scope.showPortfolioOption = false;
         start: $scope.contStartYear,
         connect: 'lower',
         range: {
-            min: [2016],
-            max: [2022],
+            min: [initDate.getFullYear()],
+            max: [$scope.endYearInvestment],
         },
         format: wNumb({
             decimals: 0,
@@ -351,8 +349,8 @@ $scope.showPortfolioOption = false;
         start: $scope.schoolYear1,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2040]
+            min: [initDate.getFullYear()],
+            max: [2050]
         },
         step: 1,
         format: wNumb({
@@ -365,8 +363,8 @@ $scope.showPortfolioOption = false;
         start: $scope.schoolYear2,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2040]
+            min: [initDate.getFullYear()],
+            max: [2050]
         },
         step: 1,
         format: wNumb({
@@ -379,8 +377,8 @@ $scope.showPortfolioOption = false;
         start: $scope.schoolYear3,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2040]
+            min: [initDate.getFullYear()],
+            max: [2050]
         },
         step: 1,
         format: wNumb({
@@ -393,8 +391,8 @@ $scope.showPortfolioOption = false;
         start: $scope.schoolYear4,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2040]
+            min: [initDate.getFullYear()],
+            max: [2050]
         },
         step: 1,
         format: wNumb({
@@ -407,8 +405,8 @@ $scope.showPortfolioOption = false;
         start: $scope.schoolYear5,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2040]
+            min: [initDate.getFullYear()],
+            max: [2050]
         },
         step: 1,
         format: wNumb({
@@ -421,8 +419,8 @@ $scope.showPortfolioOption = false;
         start: $scope.schoolYear6,
         connect: 'lower',
         range: {
-            min: [2015],
-            max: [2040]
+            min: [initDate.getFullYear()],
+            max: [2050]
         },
         step: 1,
         format: wNumb({
@@ -436,7 +434,7 @@ $scope.showPortfolioOption = false;
         connect: 'lower',
         range: {
             min: [1],
-            max: [12]
+            max: [14]
         },
         step: 1,
         format: wNumb({
@@ -450,7 +448,7 @@ $scope.showPortfolioOption = false;
         connect: 'lower',
         range: {
             min: [1],
-            max: [12]
+            max: [14]
         },
         step: 1,
         format: wNumb({
@@ -464,7 +462,7 @@ $scope.showPortfolioOption = false;
         connect: 'lower',
         range: {
             min: [1],
-            max: [12]
+            max: [14]
         },
         step: 1,
         format: wNumb({
@@ -478,7 +476,7 @@ $scope.showPortfolioOption = false;
         connect: 'lower',
         range: {
             min: [1],
-            max: [12]
+            max: [14]
         },
         step: 1,
         format: wNumb({
@@ -492,7 +490,7 @@ $scope.showPortfolioOption = false;
         connect: 'lower',
         range: {
             min: [1],
-            max: [12]
+            max: [14]
         },
         step: 1,
         format: wNumb({
@@ -506,7 +504,7 @@ $scope.showPortfolioOption = false;
         connect: 'lower',
         range: {
             min: [1],
-            max: [12]
+            max: [14]
         },
         step: 1,
         format: wNumb({
@@ -520,6 +518,11 @@ $scope.showPortfolioOption = false;
         $scope.begnYearInvestment = values[handle];
     });
 
+    begnYearInvestmentSlider.noUiSlider.on('set', function(values, handle) {
+        calculate();
+        $timeout(0);
+    });
+
     begnYearInvestmentInput.addEventListener("change", function() {
         begnYearInvestmentSlider.noUiSlider.set(this.value);
     });
@@ -527,6 +530,10 @@ $scope.showPortfolioOption = false;
     contStartYearSlider.noUiSlider.on('update', function(values, handle) {
         contStartYearInput.value = values[handle];
         $scope.contStartYear = values[handle];
+    });
+    contStartYearSlider.noUiSlider.on('set', function(values, handle) {
+        calculate();
+        $timeout(0);
     });
 
     contStartYearInput.addEventListener("change", function() {
@@ -537,6 +544,10 @@ $scope.showPortfolioOption = false;
         numChildrenInput.value = values[handle];
         $scope.numChildren = values[handle];
         changeChildrenInputs(Number($scope.numChildren));
+    });
+    numChildrenSlider.noUiSlider.on('set', function(values, handle) {
+        calculate();
+        $timeout(0);
     });
 
     numChildrenInput.addEventListener("change", function() {
@@ -558,6 +569,10 @@ $scope.showPortfolioOption = false;
         investmentReturnInput.value = values[handle];
         $scope.investmentReturn = values[handle];
     });
+    investmentReturnSlider.noUiSlider.on('set', function(values, handle) {
+        calculate();
+        $timeout(0);
+    });
 
     investmentReturnInput.addEventListener("change", function() {
         investmentReturnSlider.noUiSlider.set(investmentReturnInput.value);
@@ -566,6 +581,10 @@ $scope.showPortfolioOption = false;
     investmentVolatilitySlider.noUiSlider.on('update', function(values, handle) {
         investmentVolatilityInput.value = values[handle];
         $scope.investmentVolatility = values[handle];
+    });
+    investmentVolatilitySlider.noUiSlider.on('set', function(values, handle) {
+        calculate();
+        $timeout(0);
     });
 
     investmentVolatilityInput.addEventListener("change", function() {
@@ -576,6 +595,12 @@ $scope.showPortfolioOption = false;
         schoolYear1Input.value = values[handle];
         $scope.schoolYear1 = values[handle];
     });
+    schoolYear1Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear1) + Number($scope.schoolDuration1);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolYear1Input.addEventListener("change", function() {
         schoolYear1Slider.noUiSlider.set(schoolYear1Input.value);
@@ -584,6 +609,12 @@ $scope.showPortfolioOption = false;
     schoolYear2Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear2Input.value = values[handle];
         $scope.schoolYear2 = values[handle];
+    });
+    schoolYear2Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear2) + Number($scope.schoolDuration2);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
     });
 
     schoolYear2Input.addEventListener("change", function() {
@@ -594,6 +625,12 @@ $scope.showPortfolioOption = false;
         schoolYear3Input.value = values[handle];
         $scope.schoolYear3 = values[handle];
     });
+    schoolYear3Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear3) + Number($scope.schoolDuration3);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolYear3Input.addEventListener("change", function() {
         schoolYear3Slider.noUiSlider.set(schoolYear3Input.value);
@@ -602,6 +639,12 @@ $scope.showPortfolioOption = false;
     schoolYear4Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear4Input.value = values[handle];
         $scope.schoolYear4 = values[handle];
+    });
+    schoolYear4Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear4) + Number($scope.schoolDuration4);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
     });
 
     schoolYear4Input.addEventListener("change", function() {
@@ -612,6 +655,12 @@ $scope.showPortfolioOption = false;
         schoolYear5Input.value = values[handle];
         $scope.schoolYear5 = values[handle];
     });
+    schoolYear5Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear5) + Number($scope.schoolDuration5);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolYear5Input.addEventListener("change", function() {
         schoolYear5Slider.noUiSlider.set(schoolYear5Input.value);
@@ -620,6 +669,12 @@ $scope.showPortfolioOption = false;
     schoolYear6Slider.noUiSlider.on('update', function(values, handle) {
         schoolYear6Input.value = values[handle];
         $scope.schoolYear6 = values[handle];
+    });
+    schoolYear6Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear6) + Number($scope.schoolDuration6);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
     });
 
     schoolYear6Input.addEventListener("change", function() {
@@ -630,6 +685,12 @@ $scope.showPortfolioOption = false;
         schoolDuration1Input.value = values[handle];
         $scope.schoolDuration1 = values[handle];
     });
+    schoolDuration1Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear1) + Number($scope.schoolDuration1);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolDuration1Input.addEventListener("change", function() {
         schoolDuration1Slider.noUiSlider.set(schoolDuration1Input.value);
@@ -638,6 +699,12 @@ $scope.showPortfolioOption = false;
     schoolDuration2Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration2Input.value = values[handle];
         $scope.schoolDuration2 = values[handle];
+    });
+    schoolDuration2Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear2) + Number($scope.schoolDuration2);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
     });
 
     schoolDuration2Input.addEventListener("change", function() {
@@ -648,6 +715,12 @@ $scope.showPortfolioOption = false;
         schoolDuration3Input.value = values[handle];
         $scope.schoolDuration3 = values[handle];
     });
+    schoolDuration3Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear3) + Number($scope.schoolDuration3);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolDuration3Input.addEventListener("change", function() {
         schoolDuration3Slider.noUiSlider.set(schoolDuration3Input.value);
@@ -656,6 +729,12 @@ $scope.showPortfolioOption = false;
     schoolDuration4Slider.noUiSlider.on('update', function(values, handle) {
         schoolDuration4Input.value = values[handle];
         $scope.schoolDuration4 = values[handle];
+    });
+    schoolDuration4Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear4) + Number($scope.schoolDuration4);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
     });
 
     schoolDuration4Input.addEventListener("change", function() {
@@ -666,6 +745,12 @@ $scope.showPortfolioOption = false;
         schoolDuration5Input.value = values[handle];
         $scope.schoolDuration5 = values[handle];
     });
+    schoolDuration5Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear5) + Number($scope.schoolDuration5);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolDuration5Input.addEventListener("change", function() {
         schoolDuration5Slider.noUiSlider.set(schoolDuration5Input.value);
@@ -675,6 +760,12 @@ $scope.showPortfolioOption = false;
         schoolDuration6Input.value = values[handle];
         $scope.schoolDuration6 = values[handle];
     });
+    schoolDuration6Slider.noUiSlider.on('set', function(values, handle) {
+        tempValue = Number($scope.schoolYear6) + Number($scope.schoolDuration6);
+        changeMax(tempValue);
+        calculate();
+        $timeout(0);
+    });
 
     schoolDuration6Input.addEventListener("change", function() {
         schoolDuration6Slider.noUiSlider.set(schoolDuration6Input.value);
@@ -682,25 +773,116 @@ $scope.showPortfolioOption = false;
 
     $scope.studyingOption1Change = function(studying1) {
         $scope.studyingOption1 = studying1;
+        if (studying1) {
+            schoolYear1Input.value = $scope.begnYearInvestment;
+            schoolYear1Slider.noUiSlider.set(schoolYear1Input.value);
+        } else {
+            schoolYear1Input.value = Number($scope.begnYearInvestment) + 1;
+            schoolYear1Slider.noUiSlider.set(schoolYear1Input.value);
+        }
+        calculate();
+        $timeout(0);
     }
     $scope.studyingOption2Change = function(studying2) {
         $scope.studyingOption2 = studying2;
+        if (studying2) {
+            schoolYear2Input.value = $scope.begnYearInvestment;
+            schoolYear2Slider.noUiSlider.set(schoolYear2Input.value);
+        } else {
+            schoolYear2Input.value = Number($scope.begnYearInvestment) + 1;
+            schoolYear2Slider.noUiSlider.set(schoolYear2Input.value);
+        }
+        calculate();
+        $timeout(0);
     }
     $scope.studyingOption3Change = function(studying3) {
         $scope.studyingOption3 = studying3;
+        if (studying3) {
+            schoolYear3Input.value = $scope.begnYearInvestment;
+            schoolYear3Slider.noUiSlider.set(schoolYear3Input.value);
+        } else {
+            schoolYear3Input.value = Number($scope.begnYearInvestment) + 1;
+            schoolYear3Slider.noUiSlider.set(schoolYear3Input.value);
+        }
+        calculate();
+        $timeout(0);
     }
     $scope.studyingOption4Change = function(studying4) {
         $scope.studyingOption4 = studying4;
+        if (studying4) {
+            schoolYear4Input.value = $scope.begnYearInvestment;
+            schoolYear4Slider.noUiSlider.set(schoolYear4Input.value);
+        } else {
+            schoolYear4Input.value = Number($scope.begnYearInvestment) + 1;
+            schoolYear4Slider.noUiSlider.set(schoolYear4Input.value);
+        }
+        calculate();
+        $timeout(0);
     }
     $scope.studyingOption5Change = function(studying5) {
         $scope.studyingOption5 = studying5;
+        if (studying5) {
+            schoolYear5Input.value = $scope.begnYearInvestment;
+            schoolYear5Slider.noUiSlider.set(schoolYear5Input.value);
+        } else {
+            schoolYear5Input.value = Number($scope.begnYearInvestment) + 1;
+            schoolYear5Slider.noUiSlider.set(schoolYear5Input.value);
+        }
+        calculate();
+        $timeout(0);
     }
     $scope.studyingOption6Change = function(studying6) {
         $scope.studyingOption6 = studying6;
+        if (studying6) {
+            schoolYear6Input.value = $scope.begnYearInvestment;
+            schoolYear6Slider.noUiSlider.set(schoolYear6Input.value);
+        } else {
+            schoolYear6Input.value = Number($scope.begnYearInvestment) + 1;
+            schoolYear6Slider.noUiSlider.set(schoolYear6Input.value);
+        }
+        calculate();
+        $timeout(0);
     }
 
-    function getTotalFeeValue(temp, tempArray) {
-        return tempArray[temp - $scope.contStartYear];
+    function changeMax(tempEndYear) {
+        var numChildren = Number($scope.numChildren);
+        var schoolYear1 = Number($scope.schoolYear1);
+        var schoolDuration1 = Number($scope.schoolDuration1);
+        var schoolYear2 = Number($scope.schoolYear2);
+        var schoolDuration2 = Number($scope.schoolDuration2);
+        var schoolYear3 = Number($scope.schoolYear3);
+        var schoolDuration3 = Number($scope.schoolDuration3);
+        var schoolYear4 = Number($scope.schoolYear4);
+        var schoolDuration4 = Number($scope.schoolDuration4);
+        var schoolYear5 = Number($scope.schoolYear5);
+        var schoolDuration5 = Number($scope.schoolDuration5);
+        var schoolYear6 = Number($scope.schoolYear6);
+        var schoolDuration6 = Number($scope.schoolDuration6);
+        var childSchoolArray = [schoolYear1, schoolYear2, schoolYear3, schoolYear4, schoolYear5, schoolYear6];
+        var childDurationArray = [schoolDuration1, schoolDuration2, schoolDuration3, schoolDuration4, schoolDuration5, schoolDuration6];
+        var childGradArray = [$scope.schoolEnd1, $scope.schoolEnd2, $scope.schoolEnd3, $scope.schoolEnd4, $scope.schoolEnd5, $scope.schoolEnd6];
+
+        for (i = 0; i < numChildren; i++) {
+            childGradArray[i] = childSchoolArray[i] + childDurationArray[i] - 1;
+        }
+        $scope.endYearInvestment = childGradArray[0];
+        for (i = 1; i < numChildren; i++) {
+            $scope.endYearInvestment = $scope.endYearInvestment > childGradArray[i] ? $scope.endYearInvestment : childGradArray[i];
+        }
+
+        begnYearInvestmentSlider.noUiSlider.updateOptions({
+            range: {
+                'min': initDate.getFullYear(),
+                'max': $scope.endYearInvestment
+            }
+        });
+        contStartYearSlider.noUiSlider.updateOptions({
+            range: {
+                'min': initDate.getFullYear(),
+                'max': $scope.endYearInvestment
+            }
+        });
+
     }
 
     function PV(rate, periods, payment, future, type) {
@@ -716,8 +898,8 @@ $scope.showPortfolioOption = false;
 
     function NPV(rate, args) {
         var value = 0;
-        for (var j = 1; j < args.length; j++) {
-            value += args[j] / Math.pow(1 + rate, j);
+        for (var j = 0; j < args.length; j++) {
+            value += args[j] / Math.pow(1 + rate, j + 1);
         }
         return value;
     }
@@ -778,6 +960,7 @@ $scope.showPortfolioOption = false;
 
         min = begnYearInvestment;
         max = $scope.endYearInvestment;
+
         diff = max - min;
 
 
@@ -792,13 +975,13 @@ $scope.showPortfolioOption = false;
         for (i = 0; i < numChildren; i++) {
             if (childStudyingArray[i] == true) {
                 for (j = 0; j < childDurationArray[i]; j++) {
-                    feeArray[i][j] = annualFeeArray[i] * (  Math.pow(1 + $scope.indexlevel,yearArray[j] - begnYearInvestment) );
+                    feeArray[i][j] = annualFeeArray[i] * (Math.pow(1 + $scope.indexlevel, yearArray[j] - begnYearInvestment));
                 }
             } else {
                 temp = childSchoolArray[i] - min;
-                feeArray[i][0] = (annualFeeArray[0] + oneFeeArray[0]) * (Math.pow(1 + $scope.indexlevel,temp) );
+                feeArray[i][0] = (annualFeeArray[0] + oneFeeArray[0]) * (Math.pow(1 + $scope.indexlevel, temp));
                 for (j = 1; j < childDurationArray[i]; j++) {
-                    feeArray[i][j] = annualFeeArray[i] * ( Math.pow(1 + $scope.indexlevel,temp + j) );
+                    feeArray[i][j] = annualFeeArray[i] * (Math.pow(1 + $scope.indexlevel, temp + j));
                 }
             }
         }
@@ -810,18 +993,18 @@ $scope.showPortfolioOption = false;
         for (i = 0; i < numChildren; i++) {
             temp = childSchoolArray[i] - min;
             for (j = 0; j < feeArray[i].length; j++) {
-                totalFeeArray[temp+j] = totalFeeArray[temp+j] + feeArray[i][j];
+                totalFeeArray[temp + j] = totalFeeArray[temp + j] + feeArray[i][j];
             }
         }
 
         console.log("totalFeeArray", totalFeeArray);
 
 
-        pInvestArray[0] = 50000 * ( Math.pow(1 + $scope.portAnnualReturn[Number(spPort)],0.5)- 1) + ( Math.pow(50000 * (Math.pow((1 + $scope.portAnnualReturn[Number(spPort)]),0.5)) + 5000 - totalFeeArray[0],Math.pow((1 + $scope.portAnnualReturn[Number(spPort)]),0.5)- 1) );
+        pInvestArray[0] = 50000 * (Math.pow(1 + $scope.portAnnualReturn[Number(spPort)], 0.5) - 1) + (Math.pow(50000 * (Math.pow((1 + $scope.portAnnualReturn[Number(spPort)]), 0.5)) + 5000 - totalFeeArray[0], Math.pow((1 + $scope.portAnnualReturn[Number(spPort)]), 0.5) - 1));
         pBalArray[0] = 50000 + 5000 + pInvestArray[0] - totalFeeArray[0];
 
         for (i = 1; i < yearArray.length; i++) {
-            pInvestArray[i] = pBalArray[i - 1] * (Math.pow(1 + $scope.portAnnualReturn[Number(spPort)],0.5) - 1) + (  pBalArray[i - 1] * Math.pow(1 + $scope.portAnnualReturn[Number(spPort)],0.5)  + 5000 - totalFeeArray[i] )*(Math.pow(1 + $scope.portAnnualReturn[Number(spPort)],0.5)- 1);    
+            pInvestArray[i] = pBalArray[i - 1] * (Math.pow(1 + $scope.portAnnualReturn[Number(spPort)], 0.5) - 1) + (pBalArray[i - 1] * Math.pow(1 + $scope.portAnnualReturn[Number(spPort)], 0.5) + 5000 - totalFeeArray[i]) * (Math.pow(1 + $scope.portAnnualReturn[Number(spPort)], 0.5) - 1);
             pBalArray[i] = pBalArray[i - 1] + 5000 + pInvestArray[i] - totalFeeArray[i];
         }
 
@@ -836,7 +1019,7 @@ $scope.showPortfolioOption = false;
             childSchoolStart = childSchoolStart > childSchoolArray[i] ? childSchoolArray[i] : childSchoolStart;
         }
 
-        totalSchoolYears = max - childSchoolStart+1;
+        totalSchoolYears = max - childSchoolStart + 1;
 
         console.log("childSchoolStart", childSchoolStart);
         console.log("totalSchoolYears", totalSchoolYears);
@@ -845,7 +1028,7 @@ $scope.showPortfolioOption = false;
 
         rateOfReturn = $scope.portAnnualReturn[Number(spPort)];
 
-        expctdPrsntValue = NPV(rateOfReturn, totalFeeArray) * Math.pow(1 + rateOfReturn,contStartYear - begnYearInvestment);
+        expctdPrsntValue = NPV(rateOfReturn, totalFeeArray) * Math.pow(1 + rateOfReturn, contStartYear - begnYearInvestment);
 
         estmtdAnnualCont = expctdPrsntValue / (Math.abs(PV(rateOfReturn, childSchoolStart + totalSchoolYears - 1 - contStartYear + 1, 1, 0, 0)));
 
@@ -857,7 +1040,7 @@ $scope.showPortfolioOption = false;
 
 
 
-        var q = childSchoolStart + totalSchoolYears -1 - contStartYear + 1;
+        var q = childSchoolStart + totalSchoolYears - 1 - contStartYear + 1;
 
         console.log("q", q);
         var dataYearArray = [];
@@ -869,7 +1052,13 @@ $scope.showPortfolioOption = false;
         for (i = 1; i <= q; i++) {
             dataYearArray[i - 1] = contStartYear + i - 1;
             dataContribMoney[i - 1] = estmtdAnnualCont;
-            dataCashFlow[i - 1] = getTotalFeeValue(dataYearArray[i - 1], totalFeeArray);
+
+            if (yearArray[0] > contStartYear) {
+                dataCashFlow[i - 1] = 0;
+            } else {
+                dataCashFlow[i - 1] = totalFeeArray[dataYearArray[i - 1] - yearArray[0]];
+            }
+
             if ((i - 1) == 0) {
                 dataInvestReturn[i - 1] = 0;
                 dataPortBalance[i - 1] = dataContribMoney[i - 1] - dataCashFlow[i - 1] + dataInvestReturn[i - 1];
@@ -889,6 +1078,7 @@ $scope.showPortfolioOption = false;
     }
 
     calculate();
+    $timeout(0);
 
 
 
