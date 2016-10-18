@@ -142,6 +142,17 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         { id: 5, name: "Select your own investment return" },
     ];
 
+    $scope.infoShow = function(value) {
+        if (value) {
+            document.getElementsByClassName("information-overlay")[0].style.visibility = "visible";
+            document.getElementsByClassName("information-overlay")[0].style.zIndex = "9999";
+            document.getElementsByClassName("information-overlay")[0].style.position = "inline-block";
+            document.getElementsByClassName("information-overlay")[0].style.height = "" + (document.getElementsByClassName("otrp-calculator")[0].clientHeight - 10) + "px";
+        } else {
+            document.getElementsByClassName("information-overlay")[0].style.visibility = "hidden";
+        }
+    }
+
     $scope.c1Name="kartik";
     $scope.c2Name="kartik";
     $scope.c3Name="kartik";
