@@ -1,4 +1,4 @@
-app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRateCalculator', 'SGCRate', 'WithoutSSCalculator', 'WithSSCalculator', 'ChartServiceHc', 'DonutChartServiceHc', 'PdfMaker','LineChartService', function($scope, $timeout, AgeCalculator, TaxRateCalculator, SGCRate, WithoutSSCalculator, WithSSCalculator, ChartServiceHc, DonutChartServiceHc, PdfMaker, LineChartService) {
+app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRateCalculator', 'SGCRate', 'WithoutSSCalculator', 'WithSSCalculator', 'ChartServiceHc', 'DonutChartServiceHc', 'PdfMaker', 'LineChartService', function($scope, $timeout, AgeCalculator, TaxRateCalculator, SGCRate, WithoutSSCalculator, WithSSCalculator, ChartServiceHc, DonutChartServiceHc, PdfMaker, LineChartService) {
 
     String.prototype.replaceAll = function(search, replacement) {
         var target = this;
@@ -153,12 +153,12 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         }
     }
 
-    $scope.c1Name="kartik";
-    $scope.c2Name="kartik";
-    $scope.c3Name="kartik";
-    $scope.c4Name="kartik";
-    $scope.c5Name="kartik";
-    $scope.c6Name="kartik";
+    $scope.c1Name = "Name";
+    $scope.c2Name = "Name";
+    $scope.c3Name = "Name";
+    $scope.c4Name = "Name";
+    $scope.c5Name = "Name";
+    $scope.c6Name = "Name";
 
     $scope.studyingOption1 = false;
     $scope.studyingOption2 = false;
@@ -237,7 +237,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
 
     var initDate = new Date();
     $scope.begnYearInvestment = initDate.getFullYear();
-    $scope.numChildren = 6;
+    $scope.numChildren = 2;
     $scope.investmentReturn = 5000;
     $scope.contStartYear = initDate.getFullYear();;
     $scope.schoolYear1 = initDate.getFullYear();;
@@ -854,18 +854,29 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
             $scope.endYearInvestment = $scope.endYearInvestment > childGradArray[i] ? $scope.endYearInvestment : childGradArray[i];
         }
 
-        begnYearInvestmentSlider.noUiSlider.updateOptions({
-            range: {
-                'min': initDate.getFullYear(),
-                'max': $scope.endYearInvestment
-            }
-        });
-        contStartYearSlider.noUiSlider.updateOptions({
-            range: {
-                'min': initDate.getFullYear(),
-                'max': $scope.endYearInvestment
-            }
-        });
+
+
+        if (Number(initDate.getFullYear()) == Number($scope.endYearInvestment)) {
+            $scope.begnYearInvestment = Number($scope.endYearInvestment);
+            $scope.contStartYear = Number($scope.endYearInvestment);
+            begnYearInvestmentSlider.setAttribute('disabled', true);
+            contStartYearSlider.setAttribute('disabled', true);
+        } else {
+            begnYearInvestmentSlider.removeAttribute('disabled');
+            contStartYearSlider.removeAttribute('disabled');
+            begnYearInvestmentSlider.noUiSlider.updateOptions({
+                range: {
+                    'min': initDate.getFullYear(),
+                    'max': $scope.endYearInvestment
+                }
+            });
+            contStartYearSlider.noUiSlider.updateOptions({
+                range: {
+                    'min': initDate.getFullYear(),
+                    'max': $scope.endYearInvestment
+                }
+            });
+        }
 
     }
 
@@ -1058,7 +1069,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         //console.log("dataInvestReturn", dataInvestReturn);
         //console.log("dataPortBalance", dataPortBalance);
 
-        LineChartService.createChart(dataYearArray,dataContribMoney,dataCashFlow,dataInvestReturn,dataPortBalance);
+        LineChartService.createChart(dataYearArray, dataContribMoney, dataCashFlow, dataInvestReturn, dataPortBalance);
 
     }
 
@@ -1071,7 +1082,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         var numChildren = Number($scope.numChildren);
         var investmentReturn = Number($scope.investmentReturn.replaceAll('$', '').replaceAll(',', ''));
         var contStartYear = Number($scope.contStartYear);
-        
+
         var schoolYear1 = Number($scope.schoolYear1);
         var schoolDuration1 = Number($scope.schoolDuration1);
 
@@ -1093,7 +1104,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         var normalDetails = {
             begnYearInvestment: begnYearInvestment,
             spState: $scope.stateListOb[spState].name,
-            spStateId:spPort,
+            spStateId: spPort,
             spPort: $scope.portfolioListOb[spPort].name,
             numChildren: numChildren,
             investmentReturn: investmentReturn,
@@ -1103,58 +1114,58 @@ app.controller("TTRController", ['$scope', '$timeout', 'AgeCalculator', 'TaxRate
         //console.log('normalDetails', normalDetails);
 
         var child1Detail = {
-            c1Name: $scope.c1Name,
-            studyingOption1: $scope.studyingOption1,
-            schoolYear1: schoolYear1,
-            schoolDuration1: schoolDuration1,
-            schoolArray: $scope.schoolObjects[schoolArray[0]].name
-        }
-        //console.log('child1Detail', child1Detail);
+                c1Name: $scope.c1Name,
+                studyingOption1: $scope.studyingOption1,
+                schoolYear1: schoolYear1,
+                schoolDuration1: schoolDuration1,
+                schoolArray: $scope.schoolObjects[schoolArray[0]].name
+            }
+            //console.log('child1Detail', child1Detail);
 
         var child2Detail = {
-            c2Name: $scope.c2Name,
-            studyingOption2: $scope.studyingOption2,
-            schoolYear2: schoolYear2,
-            schoolDuration2: schoolDuration2,
-            schoolArray: $scope.schoolObjects[schoolArray[1]].name
-        }
-        //console.log('child2Detail', child2Detail);
+                c2Name: $scope.c2Name,
+                studyingOption2: $scope.studyingOption2,
+                schoolYear2: schoolYear2,
+                schoolDuration2: schoolDuration2,
+                schoolArray: $scope.schoolObjects[schoolArray[1]].name
+            }
+            //console.log('child2Detail', child2Detail);
 
         var child3Detail = {
-            c3Name: $scope.c3Name,
-            studyingOption3: $scope.studyingOption3,
-            schoolYear3: schoolYear3,
-            schoolDuration3: schoolDuration3,
-            schoolArray: $scope.schoolObjects[schoolArray[2]].name
-        }
-        //console.log('child3Detail', child3Detail);        
+                c3Name: $scope.c3Name,
+                studyingOption3: $scope.studyingOption3,
+                schoolYear3: schoolYear3,
+                schoolDuration3: schoolDuration3,
+                schoolArray: $scope.schoolObjects[schoolArray[2]].name
+            }
+            //console.log('child3Detail', child3Detail);        
 
         var child4Detail = {
-            c4Name: $scope.c4Name,
-            studyingOption4: $scope.studyingOption4,
-            schoolYear4: schoolYear4,
-            schoolDuration4: schoolDuration4,
-            schoolArray: $scope.schoolObjects[schoolArray[3]].name
-        }
-        //console.log('child4Detail', child4Detail);        
+                c4Name: $scope.c4Name,
+                studyingOption4: $scope.studyingOption4,
+                schoolYear4: schoolYear4,
+                schoolDuration4: schoolDuration4,
+                schoolArray: $scope.schoolObjects[schoolArray[3]].name
+            }
+            //console.log('child4Detail', child4Detail);        
 
         var child5Detail = {
-            c5Name: $scope.c5Name,
-            studyingOption5: $scope.studyingOption5,
-            schoolYear5: schoolYear5,
-            schoolDuration5: schoolDuration5,
-            schoolArray: $scope.schoolObjects[schoolArray[4]].name
-        }
-        //console.log('child5Detail', child5Detail);        
+                c5Name: $scope.c5Name,
+                studyingOption5: $scope.studyingOption5,
+                schoolYear5: schoolYear5,
+                schoolDuration5: schoolDuration5,
+                schoolArray: $scope.schoolObjects[schoolArray[4]].name
+            }
+            //console.log('child5Detail', child5Detail);        
 
         var child6Detail = {
-            c6Name: $scope.c6Name,
-            studyingOption6: $scope.studyingOption6,
-            schoolYear6: schoolYear6,
-            schoolDuration6: schoolDuration6,
-            schoolArray: $scope.schoolObjects[schoolArray[5]].name
-        }
-        //console.log('child6Detail', child6Detail);
+                c6Name: $scope.c6Name,
+                studyingOption6: $scope.studyingOption6,
+                schoolYear6: schoolYear6,
+                schoolDuration6: schoolDuration6,
+                schoolArray: $scope.schoolObjects[schoolArray[5]].name
+            }
+            //console.log('child6Detail', child6Detail);
 
         PdfMaker.createChart(normalDetails, child1Detail, child2Detail, child3Detail, child4Detail, child5Detail, child6Detail);
     });
