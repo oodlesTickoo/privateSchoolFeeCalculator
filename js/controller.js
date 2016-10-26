@@ -152,14 +152,8 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
             document.getElementsByClassName("information-overlay")[0].style.visibility = "hidden";
         }
     }
-        $scope.personalDetails = {
-            firstName: "kartik",
-            lastName: "tickoo",
-            email: "kartik.tickoo@gmail.com",
-            address: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            mobile: 4444444444,
-            postalCode: 1111
-        };
+    
+    $scope.personalDetails = {};
     $scope.forms = {};
     $scope.c1Name = "Name";
     $scope.c2Name = "Name";
