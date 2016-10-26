@@ -24,7 +24,7 @@
                 <h1>Private School Fee Comparison Calculator</h1>
             </div>
             <div print-hide class=" button-wrapper col-xs-4 col-sm-3 col-md-3">
-                <button type="button" class="buttons button print-icon" onclick="window.print()"></button>
+                <button type="button" class="buttons button print-icon print-doc"></button>
                 <button type="button" class="buttons button save-button" id="download" title="Save as PDF" role="button" aria-controls="email-overlay"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                 <button type="button" class="buttons button info-icon" ng-click="infoShow(true)" title="Information"></button>
             </div>
@@ -38,8 +38,55 @@
                             <span class="title-wrapper">Your Details</span>
                             <div class="otrp-clear"></div>
                         </div>
-                        <form name="ttrForm" class="ttr-form" novalidate ng-submit="submitForm(ttrForm.$valid)">
+                        <form name="forms.ttrForm" class="ttr-form" novalidate ng-submit="calculate(forms.ttrForm.$valid)">
                             <div class="row first-row-mobile">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="first-name">First Name *</label>
+                                        <input type="text" class="form-control" ng-model="personalDetails.firstName" name="firstName" id="first-name" ng-pattern="/^[a-zA-Z\s]*$/" onClick="this.select();" required>
+                                        <p class="err-msg" ng-show="!forms.ttrForm.firstName.$pristine && forms.ttrForm.firstName.$invalid">Please provide a valid first name.</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name *</label>
+                                        <input type="text" name="lastName" ng-model="personalDetails.lastName" class="form-control" id="last-name" ng-pattern="/^[a-zA-Z\s]*$/" onClick="this.select();" required>
+                                        <p class="err-msg" ng-show="(!forms.ttrForm.lastName.$pristine && forms.ttrForm.lastName.$invalid)">Please provide a valid last name.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row second-row-mobile">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="email">Email Address *</label>
+                                        <input type="email" name="email" ng-model="personalDetails.email" class="form-control" id="email" onClick="this.select();" required>
+                                        <p class="err-msg" ng-show="(!forms.ttrForm.email.$pristine && forms.ttrForm.email.$invalid)">Enter a valid email address</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="mobile-number">Mobile Number *</label>
+                                        <input type="number" name="mobile" ng-model="personalDetails.mobile" class="form-control mob-input" id="mobile-number" required onClick="this.select();" ng-pattern="/^(04)\d{8}$/g">
+                                        <p class="err-msg" ng-show="(!forms.ttrForm.mobile.$pristine && forms.ttrForm.mobile.$invalid)">Enter a valid mobile number</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row second-row-mobile">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <textarea class="form-control" name="address" ng-model="personalDetails.address" id="address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="postal-code">Postal Code</label>
+                                        <input type="number" name="postalCode" ng-model="personalDetails.postalCode" class="form-control postal-code" id="postal-code" ng-minlength="4" ng-maxlength="4" onClick="this.select();">
+                                        <p class="err-msg" ng-show="!forms.ttrForm.postalCode.$pristine &&forms.ttrForm.postalCode.$invalid">Enter a valid 4-Digit postal code</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row second-row-mobile">
                                 <div class="col-xs-12 col-sm-6 form-heading">
                                     Beginning of the year of analysis
                                     <div class="row">
@@ -62,12 +109,6 @@
                                 </div>
                             </div>
                             <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which portfolio you want to invest the money in?
-                                    <select class="selectpickerSingle selectpicker spPort">
-                                        <option ng-repeat="x in portfolioListOb" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
                                 <div class="col-xs-12 col-sm-6 form-heading">
                                     Number of Financially Dependent Children
                                     <div class="row">
@@ -81,9 +122,28 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row second-row-mobile" ng-class="{optionDrop: (!showPortfolioOption)}">
                                 <div class="col-xs-12 col-sm-6 form-heading">
+                                    From which year your are going to contribute into the portfolio?
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4">
+                                            <div class="form-group">
+                                                <input type="text" onClick="this.select();" class="form-control" id="contStartYearInput" name="contStartYearInput" ng-model="contStartYear">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                            <div id="contStartYearSlider" style="margin-top:8px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row second-row-mobile">
+                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                    Which portfolio you want to invest the money in?
+                                    <select class="selectpickerSingle selectpicker spPort">
+                                        <option ng-repeat="x in portfolioListOb" value="{{x.id}}">{{x.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 form-heading" ng-class="{optionDrop: (!showPortfolioOption)}">
                                     Define your own investment return if you choose your own model?
                                     <div class="row">
                                         <div class="col-xs-4 col-sm-4">
@@ -100,372 +160,362 @@
                                 </div>
                             </div>
                             <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    From which year your are going to contribute into the portfolio?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="contStartYearInput" name="contStartYearInput" ng-model="contStartYear">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="contStartYearSlider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <hr class="children-hr h1">
                             <div class="c1">
-                            <div class="row first-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    First Child Name
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12">
-                                            <div class="form-group">
-                                                <!-- <label for="ageInput">Your Age</label> -->
-                                                <input type="text" onClick="this.select();" class="form-control" id="c1NameInput" name="c1NameInput" ng-model="c1Name">
+                                <div class="row first-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        First Child Name
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <!-- <label for="ageInput">Your Age</label> -->
+                                                    <input type="text" onClick="this.select();" class="form-control" id="c1NameInput" name="c1NameInput" ng-model="c1Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Is your child currently studying?
+                                        <div class="row">
+                                            <button class="option-l-btn btn  " ng-click="studyingOption1Change(true)" ng-disabled="studyingOption1">Yes</button>
+                                            <button class="option-r-btn btn  " ng-click="studyingOption1Change(false)" ng-disabled="!studyingOption1">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption1">
+                                        From which year your child will be attending school?
+                                        <div class="row attend-margin">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolYear1Input" name="schoolYear1Input" ng-model="schoolYear1">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolYear1Slider" style="margin-top:8px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        How many years your child is going to study at the school (before University)?
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolDuration1Input" name="schoolDuration1Input" ng-model="schoolDuration1">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolDuration1Slider" style="margin-top:8px;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                Is your child currently studying?
-                                    <div class="row">
-                                            <button class="option-l-btn btn btn-primary " ng-click="studyingOption1Change(true)" ng-disabled="studyingOption1">Yes</button>
-                                            <button class="option-r-btn btn btn-primary " ng-click="studyingOption1Change(false)" ng-disabled="!studyingOption1">No</button>
+                                <div class="row second-row-mobile">
+                                    <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                        Which School is your child attending?
+                                        <select class="selectpickerSingle selectpicker sp1">
+                                            <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption1">
-                                    From which year your child will be attending school?
-                                    <div class="row attend-margin">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolYear1Input" name="schoolYear1Input" ng-model="schoolYear1">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolYear1Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    How many years your child is going to study at the school (before University)?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolDuration1Input" name="schoolDuration1Input" ng-model="schoolDuration1">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolDuration1Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which School is your child attending?
-                                    <select class="selectpickerSingle selectpicker sp1">
-                                        <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
                             </div>
                             <hr class="children-hr h2">
                             <div class="c2">
-                            <div class="row first-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    Second Child Name
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="c2NameInput" name="c2NameInput" ng-model="c2Name">
+                                <div class="row first-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Second Child Name
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="c2NameInput" name="c2NameInput" ng-model="c2Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Is your child currently studying?
+                                        <div class="row">
+                                            <button class="option-l-btn btn  " ng-click="studyingOption2Change(true)" ng-disabled="studyingOption2">Yes</button>
+                                            <button class="option-r-btn btn  " ng-click="studyingOption2Change(false)" ng-disabled="!studyingOption2">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption2">
+                                        From which year your child will be attending school?
+                                        <div class="row attend-margin">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolYear2Input" name="schoolYear2Input" ng-model="schoolYear2">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolYear2Slider" style="margin-top:8px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        How many years your child is going to study at the school (before University)?
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolDuration2Input" name="schoolDuration2Input" ng-model="schoolDuration2">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolDuration2Slider" style="margin-top:8px;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                Is your child currently studying?
-                                    <div class="row">
-                                            <button class="option-l-btn btn btn-primary " ng-click="studyingOption2Change(true)" ng-disabled="studyingOption2">Yes</button>
-                                            <button class="option-r-btn btn btn-primary " ng-click="studyingOption2Change(false)" ng-disabled="!studyingOption2">No</button>
+                                <div class="row second-row-mobile">
+                                    <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                        Which School is your child attending?
+                                        <select class="selectpickerSingle selectpicker sp2">
+                                            <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption2">
-                                    From which year your child will be attending school?
-                                    <div class="row attend-margin">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolYear2Input" name="schoolYear2Input" ng-model="schoolYear2">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolYear2Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    How many years your child is going to study at the school (before University)?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolDuration2Input" name="schoolDuration2Input" ng-model="schoolDuration2">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolDuration2Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which School is your child attending?
-                                    <select class="selectpickerSingle selectpicker sp2">
-                                        <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            </div>
-
                             <hr class="children-hr h3">
                             <div class="c3">
-                            <div class="row first-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    Third Child Name
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="c3NameInput" name="c3NameInput" ng-model="c3Name">
+                                <div class="row first-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Third Child Name
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="c3NameInput" name="c3NameInput" ng-model="c3Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Is your child currently studying?
+                                        <div class="row">
+                                            <button class="option-l-btn btn  " ng-click="studyingOption3Change(true)" ng-disabled="studyingOption3">Yes</button>
+                                            <button class="option-r-btn btn  " ng-click="studyingOption3Change(false)" ng-disabled="!studyingOption3">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption3">
+                                        From which year your child will be attending school?
+                                        <div class="row attend-margin">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolYear3Input" name="schoolYear3Input" ng-model="schoolYear3">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolYear3Slider" style="margin-top:8px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        How many years your child is going to study at the school (before University)?
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolDuration3Input" name="schoolDuration3Input" ng-model="schoolDuration3">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolDuration3Slider" style="margin-top:8px;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                Is your child currently studying?
-                                    <div class="row">
-                                            <button class="option-l-btn btn btn-primary " ng-click="studyingOption3Change(true)" ng-disabled="studyingOption3">Yes</button>
-                                            <button class="option-r-btn btn btn-primary " ng-click="studyingOption3Change(false)" ng-disabled="!studyingOption3">No</button>
-                                        
+                                <div class="row second-row-mobile">
+                                    <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                        Which School is your child attending?
+                                        <select class="selectpickerSingle selectpicker sp3">
+                                            <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption3">
-                                    From which year your child will be attending school?
-                                    <div class="row attend-margin">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolYear3Input" name="schoolYear3Input" ng-model="schoolYear3">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolYear3Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    How many years your child is going to study at the school (before University)?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolDuration3Input" name="schoolDuration3Input" ng-model="schoolDuration3">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolDuration3Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which School is your child attending?
-                                    <select class="selectpickerSingle selectpicker sp3">
-                                        <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
                             </div>
                             <hr class="children-hr h4">
                             <div class="c4">
-                            <div class="row first-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    Fourth Child Name
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="c4NameInput" name="c4NameInput" ng-model="c4Name">
+                                <div class="row first-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Fourth Child Name
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="c4NameInput" name="c4NameInput" ng-model="c4Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Is your child currently studying?
+                                        <div class="row">
+                                            <button class="option-l-btn btn  " ng-click="studyingOption4Change(true)" ng-disabled="studyingOption4">Yes</button>
+                                            <button class="option-r-btn btn  " ng-click="studyingOption4Change(false)" ng-disabled="!studyingOption4">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption4">
+                                        From which year your child will be attending school?
+                                        <div class="row attend-margin">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolYear4Input" name="schoolYear4Input" ng-model="schoolYear4">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolYear4Slider" style="margin-top:8px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        How many years your child is going to study at the school (before University)?
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolDuration4Input" name="schoolDuration4Input" ng-model="schoolDuration4">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolDuration4Slider" style="margin-top:8px;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                Is your child currently studying?
-                                    <div class="row">
-                                            <button class="option-l-btn btn btn-primary " ng-click="studyingOption4Change(true)" ng-disabled="studyingOption4">Yes</button>
-                                            <button class="option-r-btn btn btn-primary " ng-click="studyingOption4Change(false)" ng-disabled="!studyingOption4">No</button>
-                                    
+                                <div class="row second-row-mobile">
+                                    <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                        Which School is your child attending?
+                                        <select class="selectpickerSingle selectpicker sp4">
+                                            <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption4">
-                                    From which year your child will be attending school?
-                                    <div class="row attend-margin">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolYear4Input" name="schoolYear4Input" ng-model="schoolYear4">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolYear4Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    How many years your child is going to study at the school (before University)?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolDuration4Input" name="schoolDuration4Input" ng-model="schoolDuration4">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolDuration4Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which School is your child attending?
-                                    <select class="selectpickerSingle selectpicker sp4">
-                                        <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
                             </div>
                             <hr class="children-hr h5">
                             <div class="c5">
-                            <div class="row first-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    Fifth Child Name
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="c5NameInput" name="c5NameInput" ng-model="c5Name">
+                                <div class="row first-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Fifth Child Name
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="c5NameInput" name="c5NameInput" ng-model="c5Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Is your child currently studying?
+                                        <div class="row">
+                                            <button class="option-l-btn btn  " ng-click="studyingOption5Change(true)" ng-disabled="studyingOption5">Yes</button>
+                                            <button class="option-r-btn btn  " ng-click="studyingOption5Change(false)" ng-disabled="!studyingOption5">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption5">
+                                        From which year your child will be attending school?
+                                        <div class="row attend-margin">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolYear5Input" name="schoolYear5Input" ng-model="schoolYear5">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolYear5Slider" style="margin-top:8px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        How many years your child is going to study at the school (before University)?
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolDuration5Input" name="schoolDuration5Input" ng-model="schoolDuration5">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolDuration5Slider" style="margin-top:8px;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                Is your child currently studying?
-                                    <div class="row">
-                                            <button class="option-l-btn btn btn-primary " ng-click="studyingOption5Change(true)" ng-disabled="studyingOption5">Yes</button>
-                                            <button class="option-r-btn btn btn-primary " ng-click="studyingOption5Change(false)" ng-disabled="!studyingOption5">No</button>
+                                <div class="row second-row-mobile">
+                                    <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                        Which School is your child attending?
+                                        <select class="selectpickerSingle selectpicker sp5">
+                                            <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption5">
-                                    From which year your child will be attending school?
-                                    <div class="row attend-margin">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolYear5Input" name="schoolYear5Input" ng-model="schoolYear5">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolYear5Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    How many years your child is going to study at the school (before University)?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolDuration5Input" name="schoolDuration5Input" ng-model="schoolDuration5">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolDuration5Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which School is your child attending?
-                                    <select class="selectpickerSingle selectpicker sp5">
-                                        <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
                             </div>
                             <hr class="children-hr h6">
                             <div class="c6">
-                            <div class="row first-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    Sixth Child Name
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12">
-                                            <div class="form-group">
-                                                <!-- <label for="ageInput">Your Age</label> -->
-                                                <input type="text" onClick="this.select();" class="form-control" id="c6NameInput" name="c6NameInput" ng-model="c6Name">
+                                <div class="row first-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Sixth Child Name
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <!-- <label for="ageInput">Your Age</label> -->
+                                                    <input type="text" onClick="this.select();" class="form-control" id="c6NameInput" name="c6NameInput" ng-model="c6Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        Is your child currently studying?
+                                        <div class="row">
+                                            <button class="option-l-btn btn  " ng-click="studyingOption6Change(true)" ng-disabled="studyingOption6">Yes</button>
+                                            <button class="option-r-btn btn  " ng-click="studyingOption6Change(false)" ng-disabled="!studyingOption6">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row second-row-mobile">
+                                    <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption6">
+                                        From which year your child will be attending school?
+                                        <div class="row attend-margin">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolYear6Input" name="schoolYear6Input" ng-model="schoolYear6">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolYear6Slider" style="margin-top:8px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 form-heading">
+                                        How many years your child is going to study at the school (before University)?
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" onClick="this.select();" class="form-control" id="schoolDuration6Input" name="schoolDuration6Input" ng-model="schoolDuration6">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 form-group slider-common">
+                                                <div id="schoolDuration6Slider" style="margin-top:8px;"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                Is your child currently studying?
-                                    <div class="row">
-                                            <button class="option-l-btn btn btn-primary " ng-click="studyingOption6Change(true)" ng-disabled="studyingOption6">Yes</button>
-                                            <button class="option-r-btn btn btn-primary " ng-click="studyingOption6Change(false)" ng-disabled="!studyingOption6">No</button>
+                                <div class="row second-row-mobile">
+                                    <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                                        Which School is your child attending?
+                                        <select class="selectpickerSingle selectpicker sp6">
+                                            <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-xs-12 col-sm-6 form-heading" ng-hide="studyingOption6">
-                                    From which year your child will be attending school?
-                                    <div class="row attend-margin">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolYear6Input" name="schoolYear6Input" ng-model="schoolYear6">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolYear6Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button print-remove class="btn btn-block btn-primary" type="submit" style="width:initial ; margin:0 auto; margin-bottom:10px;">Calculate Result</button>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 form-heading">
-                                    How many years your child is going to study at the school (before University)?
-                                    <div class="row">
-                                        <div class="col-xs-4 col-sm-4">
-                                            <div class="form-group">
-                                                <input type="text" onClick="this.select();" class="form-control" id="schoolDuration6Input" name="schoolDuration6Input" ng-model="schoolDuration6">
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-8 col-sm-8 form-group slider-common">
-                                            <div id="schoolDuration6Slider" style="margin-top:8px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row second-row-mobile">
-                                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                                    Which School is your child attending?
-                                    <select class="selectpickerSingle selectpicker sp6">
-                                        <option ng-repeat="x in schoolObjects" value="{{x.id}}">{{x.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
                             </div>
                         </form>
                     </div>
@@ -474,10 +524,10 @@
                     <h3 class="results-title">Your Results</h3>
                 </div>
                 <div class="row">
-                <div class="col-xs-12">
-                <div id="container" style="padding-top:15px;padding-bottom:10px;">
-                </div>
-                </div>
+                    <div class="col-xs-12">
+                        <div id="container" style="padding-top:15px;padding-bottom:10px;">
+                        </div>
+                    </div>
                 </div>
                 <div class="row disclaimer">
                     <span class="calculator-disclaimer">Information provided by Financial Choice Pty Ltd is general financial advice only. General advice is defined under the new regulations to include information about financial products and financial markets and our current views and outlook for those products and markets. The general advice we provide includes the information you have requested from us directly or via our web site.</span>
@@ -485,6 +535,30 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <img src="images/client-logo.png" class="comp-logo" />
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 style="text-align:center;" class="modal-title">Your Form Inputs Are Incorrect/Incomplete</h4>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="modal-list">
+                                    <li ng-show="forms.ttrForm.firstName.$pristine ">Please provide your first name.</li>
+                                    <li ng-show="!forms.ttrForm.firstName.$pristine && forms.ttrForm.firstName.$invalid">Please provide a valid first name.</li>
+                                    <li ng-show="forms.ttrForm.lastName.$pristine">Please provide your last name.</li>
+                                    <li ng-show="(!forms.ttrForm.lastName.$pristine && forms.ttrForm.lastName.$invalid)">Please provide a valid last name.</li>
+                                    <li ng-show="(forms.ttrForm.email.$pristine || forms.ttrForm.email.$invalid)">Please provide a valid email address.</li>
+                                    <li ng-show="(forms.ttrForm.mobile.$pristine || forms.ttrForm.mobile.$invalid)">Please provide a valid mobile number.</li>
+                                    <li ng-show="forms.ttrForm.postalCode.$invalid">Please provide a valid 4-Digit postal code.</li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <h5 style="text-align:center">Please provide the correct inputs to calculate new result, generate the result as PDF and print the result.</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -533,15 +607,32 @@
     <script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
     <script src="js/angular.min.js" type="text/javascript"></script>
     <script src="js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script>
+    $(document).ready(function() {
+        $("input").keydown(function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $(".postal-code").keydown(function(event) {
+            if (event.keyCode === 38 || event.keyCode === 40) {
+                event.preventDefault();
+                return false;
+            }
+        });
+        $(".mob-input").keydown(function(event) {
+            if (event.keyCode === 38 || event.keyCode === 40) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+    </script>
     <script src="js/ui-bootstrap-tpls-1.3.3.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/app.js" type="text/javascript"></script>
     <script src="js/controller.js" type="text/javascript"></script>
-    <script src="js/AgeCalculatorService.js" type="text/javascript"></script>
-    <script src="js/TaxRateCalculatorService.js" type="text/javascript"></script>
-    <script src="js/SGCRateCalculator.js" type="text/javascript"></script>
-    <script src="js/WithoutSSCalculatorService.js" type="text/javascript"></script>
-    <script src="js/WithSSCalculatorService.js" type="text/javascript"></script>
     <script src="js/nouislider.min.js" type="text/javascript"></script>
     <script src="js/wNumb.js" type="text/javascript"></script>
     <script src="bower_components/angularPrint/angularPrint.js" type="text/javascript"></script>
@@ -549,8 +640,6 @@
     <script src="js/hc/data.js" type="text/javascript"></script>
     <script src="js/hc/exporting.js" type="text/javascript"></script>
     <script src="js/hc/sand-signika.js" type="text/javascript"></script>
-    <script src="js/hc/donutChartService.js" type="text/javascript"></script>
-    <script src="js/hc/chartService.js" type="text/javascript"></script>
     <script src="js/hc/lineChartService.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.16/jspdf.plugin.autotable.js"></script>
@@ -559,12 +648,7 @@
     <script src="js/StackBlur.js" type="text/javascript"></script>
     <script src="js/canvg.min.js" type="text/javascript"></script>
     <script src="js/PdfMaker.js" type="text/javascript"></script>
-    <script>
-        // $(".selectpickerSingle").on('hidden.bs.select',function(){
-        //     console.log(this.val);
-        //     console.log(event.target);
-        // })
-    </script>
+
 </body>
 
 </html>
