@@ -10,10 +10,10 @@ app.service('PdfMaker', [function() {
         });
 
         function reduceToCapitalize(nameArr) {
-            if (nameArr.length < 2) {
-                var name = nameArr[0];
-                return name[0].toUpperCase() + name.slice(1);
-            }
+            // if (nameArr.length < 2) {
+            //     var name = nameArr[0];
+            //     return name[0].toUpperCase() + name.slice(1);
+            // }
             return nameArr.reduce(function(first, second) {
                 return first[0].toUpperCase() + first.slice(1) + " " + second[0].toUpperCase() + second.slice(1)
             })
@@ -71,10 +71,10 @@ app.service('PdfMaker', [function() {
             { "info": "From which year your are going to contribute into the portfolio?", "value": normalDetails.contStartYear },
         ];
 
-        if (normalDetails.address !== undefined && normalDetails.address.length !== 0) {
-            rows1.push({ "info": "Address", "value": reduceToCapitalize(normalDetails.address.trim().replaceAll('\n', ' ').replace(/\s+/g, " ").split(" ")) });
-            rows111.push({ "info": "Address", "value": reduceToCapitalize(normalDetails.address.trim().replaceAll('\n', ' ').replace(/\s+/g, " ").split(" ")) });
-        }
+        // if (normalDetails.address !== undefined && normalDetails.address.length !== 0) {
+        //     rows1.push({ "info": "Address", "value": reduceToCapitalize(normalDetails.address.trim().replaceAll('\n', ' ').replace(/\s+/g, " ").split(" ")) });
+        //     rows111.push({ "info": "Address", "value": reduceToCapitalize(normalDetails.address.trim().replaceAll('\n', ' ').replace(/\s+/g, " ").split(" ")) });
+        // }
 
         if (normalDetails.postalCode != undefined) {
             var postCode = normalDetails.postalCode;
