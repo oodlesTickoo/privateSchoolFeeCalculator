@@ -1190,6 +1190,19 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
 
     $(".print-doc").on("click", function() {
         if ($scope.forms.ttrForm.$valid) {
+
+                var printUpdate = function () {
+        $('#container').highcharts().reflow();
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function (mql) {
+            printUpdate();
+        });
+    }
+
+        
             print();
         } else {
             $("#myModal").modal('show');
