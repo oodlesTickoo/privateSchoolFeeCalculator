@@ -1,4 +1,4 @@
-app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartService', function($scope, $timeout, PdfMaker, LineChartService) {
+app.controller("TTRController", ['$scope', '$timeout', 'PdfMaker', 'LineChartService', function($scope, $timeout, PdfMaker, LineChartService) {
 
     String.prototype.replaceAll = function(search, replacement) {
         var target = this;
@@ -135,11 +135,9 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
         { id: 6, name: "TAS" }
     ];
     $scope.portfolioListOb = [{ id: 0, name: "FC Conservative" },
-        { id: 1, name: "FC Moderate" },
-        { id: 2, name: "FC Balanced" },
-        { id: 3, name: "FC Balanced Growth" },
-        { id: 4, name: "FC Growth" },
-        { id: 5, name: "Select your own investment return" },
+        { id: 1, name: "FC Balanced" },
+        { id: 2, name: "FC Growth" },
+        { id: 3, name: "Select your own investment return" },
     ];
 
     $scope.infoShow = function(value) {
@@ -152,15 +150,28 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
             document.getElementsByClassName("information-overlay")[0].style.visibility = "hidden";
         }
     }
-    
-    $scope.personalDetails = {};
+
+    $scope.oneOpen = true;
+    $scope.twoOpen = false;
+    $scope.threeOpen = false;
+
+    $scope.personalDetails = {
+        firstName: "Dexter",
+        lastName: "Payne",
+        email: "dexter@gmail.com",
+        mobile: 412121212,
+        postalCode: 1234
+    };
     $scope.forms = {};
-    $scope.c1Name = "Name";
-    $scope.c2Name = "Name";
-    $scope.c3Name = "Name";
-    $scope.c4Name = "Name";
-    $scope.c5Name = "Name";
-    $scope.c6Name = "Name";
+    $scope.c1Name = "Max";
+    $scope.c2Name = "Monica";
+    $scope.c3Name = "Adele";
+    $scope.c4Name = "Rita";
+    $scope.c5Name = "Tom";
+    $scope.c6Name = "Mike";
+    $scope.nameArray = [$scope.c1Name, $scope.c2Name, $scope.c3Name, $scope.c4Name, $scope.c5Name, $scope.c6Name];
+    $scope.chartOneOpen = true;
+    $scope.alterOption = false;
 
     $scope.studyingOption1 = false;
     $scope.studyingOption2 = false;
@@ -171,7 +182,7 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
 
     $scope.indexlevel = 0.04;
 
-    $scope.portAnnualReturn = [0.0456, 0.0655, 0.0853, 0.1009, 0.1165, 0.06];
+    $scope.portAnnualReturn = [0.0456, 0.0853, 0.1165, 0.06];
 
     var spState = "0",
         spPort = "0",
@@ -182,11 +193,10 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
         school5 = "0",
         school6 = "0";
     var schoolArray = [school1, school2, school3, school4, school5, school6];
-
+    var publicSchol_avgCostArray = [1615.33, 1395, 471.25, 762.5, 950, 357.14, 390];
     $scope.showPortfolioOption = false;
     $('.spState').on('change', function() {
         spState = $('.spState option:selected').val();
-        //console.log("spState", spState)
         $timeout(0);
     });
 
@@ -243,17 +253,17 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
     $scope.investmentReturn = 5000;
     $scope.contStartYear = initDate.getFullYear();;
     $scope.schoolYear1 = initDate.getFullYear();;
-    $scope.schoolDuration1 = 8;
+    $scope.schoolDuration1 = 6
     $scope.schoolYear2 = initDate.getFullYear();;
-    $scope.schoolDuration2 = 10;
+    $scope.schoolDuration2 = 6;
     $scope.schoolYear3 = initDate.getFullYear();;
-    $scope.schoolDuration3 = 10;
+    $scope.schoolDuration3 = 6;
     $scope.schoolYear4 = initDate.getFullYear();;
-    $scope.schoolDuration4 = 10;
+    $scope.schoolDuration4 = 6;
     $scope.schoolYear5 = initDate.getFullYear();;
-    $scope.schoolDuration5 = 10;
+    $scope.schoolDuration5 = 6;
     $scope.schoolYear6 = initDate.getFullYear();;
-    $scope.schoolDuration6 = 10;
+    $scope.schoolDuration6 = 6;
     $scope.endYearInvestment = Number($scope.schoolYear2) + Number($scope.schoolDuration2)
 
     var begnYearInvestmentSlider = document.getElementById("begnYearInvestmentSlider"),
@@ -901,6 +911,80 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
         return value;
     }
 
+    function FV(rate, nper, pmt, pv, type) {
+        var pow = Math.pow(1 + rate, nper),
+            fv;
+
+        pv = pv || 0;
+        type = type || 0;
+
+        if (rate) {
+            fv = (pmt * (1 + rate * type) * (1 - pow) / rate) - pv * pow;
+        } else {
+            fv = -1 * (pv + pmt * nper);
+        }
+        return fv;
+    }
+
+    var realRateReturn = 0.0156;
+    $scope.majorFeesListObj = [{ id: 0, name: "Major in Commerce" },
+        { id: 1, name: "Major in Medical Science" },
+        { id: 2, name: "Major in Art" }
+    ];
+
+    var majorSelectedArray = [0, 0, 0, 0, 0, 0]
+    var publicSchol_avgCostArray = [1615.33, 1395, 471.25, 762.5, 950, 357.14, 390];
+    var commerceFeeArray = [10596, 10596, 10597, 10429, 13176, 10596, 10596];
+    var medicalScienceFeeArray = [9823, 10596, 9782, 9439.33, 9896, 10596, 10596];
+    var artFeeArray = [7511, 6349, 4239.67, 6935.67, 6524, 6349, 6349];
+    var majorFeesArray = [commerceFeeArray, medicalScienceFeeArray, artFeeArray];
+    var majorSubject;
+    var loanValuationRatio = 0.8;
+    var avgSchool_AnnualFee;
+    var presentValue_PrivateSchoolFeeArray = [];
+    var presentValue_PublicSchoolFeeArray = [];
+    var savingFeeArray = [];
+    var savingAccumulationArray = [];
+    var univCostArray = [];
+    var projectedUnivFeeArray = [];
+    var remainderUnivFeeArray = [];
+    var propertyPurchasingPowerArray = [];
+
+    $('.spMajor1').on('change', function() {
+        majorSelectedArray[0] = $('.spMajor1 option:selected').val();
+        console.log("majorSelectedArray[0]", majorSelectedArray[0]);
+        //calculateFinal();
+    });
+    $('.spMajor2').on('change', function() {
+        majorSelectedArray[1] = $('.spMajor2 option:selected').val();
+        //console.log("schoolArray[5]", schoolArray[5])
+        //calculateFinal();
+    });
+    $('.spMajor3').on('change', function() {
+        majorSelectedArray[2] = $('.spMajor3 option:selected').val();
+        //console.log("schoolArray[5]", schoolArray[5])
+        //calculateFinal();
+    });
+    $('.spMajor4').on('change', function() {
+        majorSelectedArray[3] = $('.spMajor4 option:selected').val();
+        //console.log("schoolArray[5]", schoolArray[5])
+        //calculateFinal();
+    });
+    $('.spMajor5').on('change', function() {
+        majorSelectedArray[4] = $('.spMajor5 option:selected').val();
+        //console.log("schoolArray[5]", schoolArray[5])
+        //calculateFinal();
+    });
+    $('.spMajor6').on('change', function() {
+        majorSelectedArray[5] = $('.spMajor6 option:selected').val();
+        //console.log("schoolArray[5]", schoolArray[5])
+        //calculateFinal();
+    });
+
+
+
+
+
     $scope.calculate = function(isValid) {
 
         if (isValid) {
@@ -985,6 +1069,8 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
             }
 
             //console.log("feeArray", feeArray);
+
+
             //console.log("feeArray 1", feeArray[0]);
             //console.log("feeArray 2", feeArray[1]);
 
@@ -1067,6 +1153,39 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
 
             }
 
+            var countFeeArray = [0, 0, 0, 0, 0, 0];
+            for (i = 0; i < numChildren; i++) {
+                var temp = 0
+                for (j = 0; j < feeArray[i].length; j++) {
+                    temp = temp + feeArray[i][j];
+                }
+                countFeeArray[i] = temp;
+            }
+
+
+            for (i = 0; i < numChildren; i++) {
+                avgSchool_AnnualFee = publicSchol_avgCostArray[spState];
+                presentValue_PrivateSchoolFeeArray[i] = (Math.abs(PV(realRateReturn, childDurationArray[i], annualFeeArray[i], 0, 0))) * (Math.pow((1 + realRateReturn), (childSchoolArray[i] - min))) + (oneFeeArray[i]) * (Math.pow((1 + realRateReturn), (childSchoolArray[i] - min)));
+                presentValue_PublicSchoolFeeArray[i] = (Math.abs(PV(realRateReturn, childDurationArray[i], avgSchool_AnnualFee, 0, 0))) * (Math.pow((1 + realRateReturn), (childSchoolArray[i] - min)));
+                savingFeeArray[i] = presentValue_PrivateSchoolFeeArray[i] - presentValue_PublicSchoolFeeArray[i];
+                savingAccumulationArray[i] = (savingFeeArray[i]) * Math.pow((1 + realRateReturn), (childGradArray[i] - begnYearInvestment))
+                univCostArray[i] = majorFeesArray[majorSelectedArray[i]][spState];
+                projectedUnivFeeArray[i] = Math.abs(FV(realRateReturn, 3, (univCostArray[i]) * (Math.pow((1 + $scope.indexlevel), (childGradArray[i] - begnYearInvestment)))));
+                remainderUnivFeeArray[i] = (savingAccumulationArray[i] * Math.pow((1 + realRateReturn), 3)) - projectedUnivFeeArray[i];
+                propertyPurchasingPowerArray[i] = remainderUnivFeeArray[i] / (1 - loanValuationRatio);
+            }
+
+            /*console.log("countFeeArray", countFeeArray);
+            console.log("avgSchool_AnnualFee", avgSchool_AnnualFee);
+            console.log("presentValue_PrivateSchoolFeeArray", presentValue_PrivateSchoolFeeArray);
+            console.log("presentValue_PublicSchoolFeeArray", presentValue_PublicSchoolFeeArray);
+            console.log("savingFeeArray",savingFeeArray );
+            console.log("savingAccumulationArray", savingAccumulationArray);
+            console.log("univCostArray", univCostArray);
+            console.log("projectedUnivFeeArray", projectedUnivFeeArray);
+            console.log("remainderUnivFeeArray", remainderUnivFeeArray);
+            console.log("propertyPurchasingPowerArray", propertyPurchasingPowerArray);*/
+
             //console.log("dataYearArray", dataYearArray);
             //console.log("dataContribMoney", dataContribMoney);
             //console.log("dataCashFlow", dataCashFlow);
@@ -1074,6 +1193,8 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
             //console.log("dataPortBalance", dataPortBalance);
 
             LineChartService.createChart(dataYearArray, dataContribMoney, dataCashFlow, dataInvestReturn, dataPortBalance);
+            LineChartService.createChart2(presentValue_PrivateSchoolFeeArray, presentValue_PublicSchoolFeeArray, savingFeeArray, numChildren, $scope.nameArray);
+            LineChartService.createChart3(propertyPurchasingPowerArray, remainderUnivFeeArray, projectedUnivFeeArray, numChildren, $scope.nameArray);
 
         } else {
             $("#myModal").modal('show');
@@ -1187,28 +1308,133 @@ app.controller("TTRController", ['$scope', '$timeout','PdfMaker', 'LineChartServ
             $("#myModal").modal('show');
         }
     });
+/*
+    document.getElementById("bar-chart").addEventListener("click", function() {
 
-    $(".print-doc").on("click", function() {
-        if ($scope.forms.ttrForm.$valid) {
+        $scope.chartOneOpen = true;
+        $("#containerA").highcharts().reflow();
 
-                var printUpdate = function () {
-        $('#container').highcharts().reflow();
-    };
+        document.getElementById("containerA").style.display = "none";
+        document.getElementById("container").style.display = "block";
 
-    if (window.matchMedia) {
-        var mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addListener(function (mql) {
-            printUpdate();
-        });
+        $("#container").highcharts().reflow();
+    });
+
+    document.getElementById("area-chart").addEventListener("click", function() {
+
+        $scope.chartOneOpen = false;
+        $("#container").highcharts().reflow();
+
+        document.getElementById("container").style.display = "none";
+        document.getElementById("containerA").style.display = "block";
+
+
+        $("#containerA").highcharts().reflow();
+    });*/
+
+    $scope.chartOneOpen = function(temp) {
+        console.log("q",temp);
+        switch (temp) {
+            case 1:
+                $scope.oneOpen = true;
+                $scope.twoOpen = false;
+                $scope.threeOpen = false;
+                $("#containerA").highcharts().reflow();
+                $("#containerB").highcharts().reflow();
+                document.getElementById("containerA").style.display = "none";
+                document.getElementById("containerB").style.display = "none";
+                document.getElementById("container").style.display = "block";
+                $("#container").highcharts().reflow();
+                break;
+            case 2:
+                $scope.oneOpen = false;
+                $scope.twoOpen = true;
+                $scope.threeOpen = false;
+                $("#container").highcharts().reflow();
+                $("#containerB").highcharts().reflow();
+                document.getElementById("container").style.display = "none";
+                document.getElementById("containerB").style.display = "none";
+                document.getElementById("containerA").style.display = "block";
+                $("#containerA").highcharts().reflow();
+                break;
+            case 3:
+                $scope.oneOpen = false;
+                $scope.twoOpen = false;
+                $scope.threeOpen = true;
+                $("#container").highcharts().reflow();
+                $("#containerA").highcharts().reflow();
+                document.getElementById("container").style.display = "none";
+                document.getElementById("containerA").style.display = "none";
+                document.getElementById("containerB").style.display = "block";
+                $("#containerB").highcharts().reflow();
+                break;
+        }
+
     }
 
-        
+    $(".print-doc").on("click", printBothCharts);
+
+    function printBothCharts() {
+        if ($scope.forms.ttrForm.$valid) {
+            var printUpdate = function() {
+                $('#container').highcharts().reflow();
+                $("#containerA").highcharts().reflow();
+            };
+
+            if ($scope.chartOneOpen) {
+                document.getElementById("containerA").style.display = "block";
+
+                if (window.matchMedia) {
+                    var mediaQueryList = window.matchMedia('print');
+                    mediaQueryList.addListener(function(mql) {
+                        printUpdate();
+                    });
+                }
+                window.print();
+                setTimeout(function() {
+                    document.getElementById("containerA").style.display = "none";
+                }, 200);
+            } else {
+                document.getElementById("container").style.display = "block";
+
+                if (window.matchMedia) {
+                    var mediaQueryList = window.matchMedia('print');
+                    mediaQueryList.addListener(function(mql) {
+                        printUpdate();
+                    });
+                }
+                window.print();
+                setTimeout(function() {
+                    document.getElementById("container").style.display = "none";
+                }, 200);
+            }
+        } else {
+            $("#myModal").modal('show');
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+    };
+
+    /*$(".print-doc").on("click", function() {
+        if ($scope.forms.ttrForm.$valid) {
+
+            var printUpdate = function() {
+                $('#container').highcharts().reflow();
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    printUpdate();
+                });
+            }
+
+
             print();
         } else {
             $("#myModal").modal('show');
             $("html, body").animate({ scrollTop: 0 }, "slow");
         }
     })
-
+*/
 
 }]);
