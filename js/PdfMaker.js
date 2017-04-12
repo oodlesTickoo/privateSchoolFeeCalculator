@@ -55,9 +55,9 @@ app.service('PdfMaker', [function() {
             { "info": "Mobile Number", "value": "0" + normalDetails.mobile },
             { "info": "Beginning of the year of analysis", "value": normalDetails.begnYearInvestment },
             { "info": "Which state are you living in?", "value": normalDetails.spState },
-            { "info": "Which portfolio you want to invest the money in?", "value": normalDetails.spPort },
+            { "info": "Which portfolio best suits your needs?", "value": normalDetails.spPort },
             { "info": "Number of Financially Dependent Children", "value": normalDetails.numChildren },
-            { "info": "From which year your are going to contribute into the portfolio?", "value": normalDetails.contStartYear },
+            { "info": "What year will you start contributing to the investment portfolio?", "value": normalDetails.contStartYear },
         ];
 
         var rows111 = [
@@ -68,7 +68,7 @@ app.service('PdfMaker', [function() {
             { "info": "Which state are you living in?", "value": normalDetails.spState },
             { "info": "Define your own investment return if you choose your own model?", "value": moneyFormat.to(normalDetails.investmentReturn) },
             { "info": "Number of Financially Dependent Children", "value": normalDetails.numChildren },
-            { "info": "From which year your are going to contribute into the portfolio?", "value": normalDetails.contStartYear },
+            { "info": "What year will you start contributing to the investment portfolio?", "value": normalDetails.contStartYear },
         ];
 
         // if (normalDetails.address !== undefined && normalDetails.address.length !== 0) {
@@ -100,10 +100,11 @@ app.service('PdfMaker', [function() {
         ];
         var rows2 = [
             { "assets": "Child Name", "value": child1Detail.c1Name },
-            { "assets": "Is he/she currently studying?", "value": child1Detail.studyingOption1 },
-            { "assets": "From which year he is/will be attending school?", "value": child1Detail.schoolYear1 },
-            { "assets": "How many years he is going to study at the school (before Uni)?", "value": child1Detail.schoolDuration1 },
-            { "assets": "Which School is he/she attending?", "value": child1Detail.schoolArray },
+            { "assets": "Is your child currently enrolled in school?", "value": child1Detail.studyingOption1 },
+            { "assets": "Which year will you enrol your child in school?", "value": child1Detail.schoolYear1 },
+            { "assets": "How many years will your child attend school?", "value": child1Detail.schoolDuration1 },
+            { "assets": "Which school will your child be enrolled at?", "value": child1Detail.schoolArray },
+            { "assets": "What major would your child like to choose at University?", "value": child1Detail.univArray }
         ];
 
         var columns3 = [
@@ -112,10 +113,11 @@ app.service('PdfMaker', [function() {
         ];
         var rows3 = [
             { "assets": "Child Name", "value": child2Detail.c2Name },
-            { "assets": "Is he/she currently studying?", "value": child2Detail.studyingOption2 },
-            { "assets": "From which year he is/will be attending school?", "value": child2Detail.schoolYear2 },
-            { "assets": "How many years he is going to study at the school (before Uni)?", "value": child2Detail.schoolDuration2 },
-            { "assets": "Which School is he/she attending?", "value": child2Detail.schoolArray },
+            { "assets": "Is your child currently enrolled in school?", "value": child2Detail.studyingOption2 },
+            { "assets": "Which year will you enrol your child in school?", "value": child2Detail.schoolYear2 },
+            { "assets": "How many years will your child attend school?", "value": child2Detail.schoolDuration2 },
+            { "assets": "Which school will your child be enrolled at?", "value": child2Detail.schoolArray },
+            { "assets": "What major would your child like to choose at University?", "value": child2Detail.univArray }
         ];
 
         var columns4 = [
@@ -124,10 +126,11 @@ app.service('PdfMaker', [function() {
         ];
         var rows4 = [
             { "assets": "Child Name", "value": child3Detail.c3Name },
-            { "assets": "Is he/she currently studying?", "value": child3Detail.studyingOption3 },
-            { "assets": "From which year he is/will be attending school?", "value": child3Detail.schoolYear3 },
-            { "assets": "How many years he is going to study at the school (before Uni)?", "value": child3Detail.schoolDuration3 },
-            { "assets": "Which School is he/she attending?", "value": child3Detail.schoolArray },
+            { "assets": "Is your child currently enrolled in school?", "value": child3Detail.studyingOption3 },
+            { "assets": "Which year will you enrol your child in school?", "value": child3Detail.schoolYear3 },
+            { "assets": "How many years will your child attend school?", "value": child3Detail.schoolDuration3 },
+            { "assets": "Which school will your child be enrolled at?", "value": child3Detail.schoolArray },
+            { "assets": "What major would your child like to choose at University?", "value": child3Detail.univArray }
         ];
 
         var columns5 = [
@@ -136,10 +139,11 @@ app.service('PdfMaker', [function() {
         ];
         var rows5 = [
             { "assets": "Child Name", "value": child4Detail.c4Name },
-            { "assets": "Is he/she currently studying?", "value": child4Detail.studyingOption4 },
-            { "assets": "From which year he is/will be attending school?", "value": child4Detail.schoolYear4 },
-            { "assets": "How many years he is going to study at the school (before Uni)?", "value": child4Detail.schoolDuration4 },
-            { "assets": "Which School is he/she attending?", "value": child4Detail.schoolArray },
+            { "assets": "Is your child currently enrolled in school?", "value": child4Detail.studyingOption4 },
+            { "assets": "Which year will you enrol your child in school?", "value": child4Detail.schoolYear4 },
+            { "assets": "How many years will your child attend school?", "value": child4Detail.schoolDuration4 },
+            { "assets": "Which school will your child be enrolled at?", "value": child4Detail.schoolArray },
+            { "assets": "What major would your child like to choose at University?", "value": child4Detail.univArray }
         ];
 
         var columns6 = [
@@ -148,10 +152,11 @@ app.service('PdfMaker', [function() {
         ];
         var rows6 = [
             { "assets": "Child Name", "value": child5Detail.c5Name },
-            { "assets": "Is he/she currently studying?", "value": child5Detail.studyingOption5 },
-            { "assets": "From which year he is/will be attending school?", "value": child5Detail.schoolYear5 },
-            { "assets": "How many years he is going to study at the school (before Uni)?", "value": child5Detail.schoolDuration5 },
-            { "assets": "Which School is he/she attending?", "value": child5Detail.schoolArray },
+            { "assets": "Is your child currently enrolled in school?", "value": child5Detail.studyingOption5 },
+            { "assets": "Which year will you enrol your child in school?", "value": child5Detail.schoolYear5 },
+            { "assets": "How many years will your child attend school?", "value": child5Detail.schoolDuration5 },
+            { "assets": "Which school will your child be enrolled at?", "value": child5Detail.schoolArray },
+            { "assets": "What major would your child like to choose at University?", "value": child5Detail.univArray }
         ];
 
         var columns7 = [
@@ -160,10 +165,11 @@ app.service('PdfMaker', [function() {
         ];
         var rows7 = [
             { "assets": "Child Name", "value": child6Detail.c6Name },
-            { "assets": "Is he/she currently studying?", "value": child6Detail.studyingOption6 },
-            { "assets": "From which year he is/will be attending school?", "value": child6Detail.schoolYear6 },
-            { "assets": "How many years he is going to study at the school (before Uni)?", "value": child6Detail.schoolDuration6 },
-            { "assets": "Which School is he/she attending?", "value": child6Detail.schoolArray },
+            { "assets": "Is your child currently enrolled in school?", "value": child6Detail.studyingOption6 },
+            { "assets": "Which year will you enrol your child in school?", "value": child6Detail.schoolYear6 },
+            { "assets": "How many years will your child attend school?", "value": child6Detail.schoolDuration6 },
+            { "assets": "Which school will your child be enrolled at?", "value": child6Detail.schoolArray },
+            { "assets": "What major would your child like to choose at University?", "value": child6Detail.univArray }
         ];
 
         var options = {
@@ -254,8 +260,29 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(img, 'PNG', 60, top+40);
 
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerA').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 440);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 2);
+
+                doc.addPage();
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerB').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 40);
+
                 doc.autoTable(columnsP3, rowsP3, {
-                    margin: { top: 440 },
+                    margin: { top: 400 },
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 10
@@ -264,7 +291,7 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 2);
+                doc.text(510, 820, 'PAGE ' + 3);
 
                 break;
             case 2:
@@ -306,8 +333,29 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(img, 'PNG', 60, top+40);
 
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerA').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 440);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 2);
+
+                doc.addPage();
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerB').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 40);
+
                 doc.autoTable(columnsP3, rowsP3, {
-                    margin: { top: 440 },
+                    margin: { top: 400 },
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 10
@@ -316,7 +364,7 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 2);
+                doc.text(510, 820, 'PAGE ' + 3);
 
                 break;
             case 3:
@@ -371,11 +419,35 @@ app.service('PdfMaker', [function() {
                 var img = canvas.toDataURL("image/png");
 
                 doc.addImage(img, 'PNG', 60, top+40);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 3);
 
-                var top = doc.autoTableEndPosY()+330;
+                doc.addPage();
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerA').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 40);
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerB').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 400);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 3);
+
+                doc.addPage();
 
                 doc.autoTable(columnsP3, rowsP3, {
-                    margin: { top: top+40 },
+                    margin: { top: 40 },
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 10
@@ -384,7 +456,7 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 2);
+                doc.text(510, 820, 'PAGE ' + 4);
 
                 break;
             case 4:
@@ -454,14 +526,33 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 2);
+                doc.text(510, 820, 'PAGE ' + 2);                
 
                 doc.addPage();
 
-                
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerA').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 40);
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerB').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 400);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 3);
+
+                doc.addPage();
 
                 doc.autoTable(columnsP3, rowsP3, {
-                    margin: { top: 20 },
+                    margin: { top: 40 },
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 10
@@ -470,7 +561,7 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 3);
+                doc.text(510, 820, 'PAGE ' + 4);
 
                 break;
             case 5:
@@ -557,8 +648,29 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(img, 'PNG', 60, top+40);
 
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerA').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 440);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 3);
+
+                doc.addPage();
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerB').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 40);
+
                 doc.autoTable(columnsP3, rowsP3, {
-                    margin: { top: 440 },
+                    margin: { top: 400 },
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 10
@@ -567,7 +679,8 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 3);
+                doc.text(510, 820, 'PAGE ' + 4);
+
 
                 break;
             case 6:
@@ -669,8 +782,29 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(img, 'PNG', 60, top+40);
 
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerA').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 440);
+                doc.addImage(imgData2, 'PNG', 40, 790);
+                doc.setFontSize(10);
+                doc.text(510, 820, 'PAGE ' + 3);
+
+                doc.addPage();
+
+                var canvas = document.createElement("canvas");
+
+                canvg(canvas, $('#containerB').highcharts().getSVG());
+
+                var img = canvas.toDataURL("image/png");
+
+                doc.addImage(img, 'PNG', 60, 40);
+
                 doc.autoTable(columnsP3, rowsP3, {
-                    margin: { top: 440 },
+                    margin: { top: 400 },
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 10
@@ -679,7 +813,7 @@ app.service('PdfMaker', [function() {
 
                 doc.addImage(imgData2, 'PNG', 40, 790);
                 doc.setFontSize(10);
-                doc.text(510, 820, 'PAGE ' + 3);
+                doc.text(510, 820, 'PAGE ' + 4);
 
                 break;
         }

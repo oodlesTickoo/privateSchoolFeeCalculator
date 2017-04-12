@@ -11,7 +11,17 @@
 {
   clear: both;
 }
+#chart-bg{
+  background: white; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #fff , #d6d9da); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #fff, #d6d9da); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #fff, #d6d9da); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #fff , #d6d9da);
+}
 
+.public-note{
+      color: #0a4271;
+}
 .hollow-icon-heading{
     width: 19px;
     height: 19px;
@@ -735,11 +745,11 @@ p.thpError-text{
 }
 
 .chart-buttons-row button{
-  background-color:#91B6BE !important;
-  color:#fff;
+  background-color: Transparent!important;
+    border: 1px solid black !important;
+    color: black;
   border-radius:0 !important;
   outline:none;
-  border:1px solid #ddd;
 }
 
 .chart-buttons-row button:hover{
@@ -747,16 +757,30 @@ p.thpError-text{
 }
 
 .chart-buttons-row button:hover,.chart-buttons-row button:active,.chart-buttons-row button:focus,.chart-buttons-row button:visited{
-  color:#fff; !important;
-  background-color: #91B6BE !important;
+  background-color: Transparent!important;
+    border: 1px solid black !important;
   outline:none !important;
+   color: black;
     border-radius: 0 !important;
-        border: none !important;
     outline: none !important;
 }
 
 .print-btn button{
 float:right;
+}
+
+.btn.disabled >img, .btn[disabled] > img, fieldset[disabled] .btn >img{
+      content: url(../images/bars-chart.svg)!important;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+      content: url(../images/bars-chart.svg)!important;
+      background-color: black!important;
+      opacity: 1!important;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled].focus, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover{
+  background-color: black!important;
 }
 
 

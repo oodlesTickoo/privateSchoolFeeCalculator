@@ -40,18 +40,44 @@ Highcharts.createElement('link', {
              colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
          }
          return colors;
-     }());
+     }());*/
 
 var perShapeGradient = {
             x1: 0,
             y1: 0,
             x2: 1,
             y2: 0
-        };*/
+        };
 Highcharts.theme = {
 	// colors: ["#006DB0", "#4997D0", "#0095B6", "#42C0FB"],
 	// colors: ["#7d2f86","#7b5aa7", "#b478d2",  "#c4a6f7"],
-	colors: ["#7CB5EC","#434348","#90ed7d","#FFBC75"],
+	  //colors: ["rgba(116, 232, 228, 0.9)","rgba(144, 237, 125, 0.9)","rgba(242, 123, 123, 0.9)","rgba(0,0,255, 0.9)"],
+	  //colors: ["#74e8e4","#90ed7d","#f27b7b","#FFBC75"],
+	 // color: ['rgba(0,0,255, 0.5)'],
+	colors: [{
+            linearGradient: perShapeGradient,
+            stops: [
+            	[0, '#78caf8'],
+                [1, '#2e96d0']
+                ]
+            }, {
+            linearGradient: perShapeGradient,
+            stops: [
+                [0, '#90ed7d'],
+                [1, '#76c466']
+                ]
+            }, {
+            linearGradient: perShapeGradient,
+            stops: [
+                [0, '#e28585' ],
+                [1, '#ce5c5c']
+                ]},{
+            linearGradient: perShapeGradient,
+            stops: [
+                [0, '#3F3F3F'],
+                [1, '#6E6F6F']
+                ]}, 
+        ],
 		// colors: ["#3f7b82","#8bc3b9", "#b4d4c0",  "#acd2bb"], blue1
 		// colors: ["#3f7b82","#558381","#8bc3b9", "#b4d4c0"], blue2
 		// colors: ["#225802","#728239","#88872b","#bbc46b"], green
@@ -61,30 +87,7 @@ Highcharts.theme = {
 
 		// colors: ["#FE0001", "#F5DE1D", "#0271BB", "#039349", "#F5DE1D", "#F99321", "#eeaaee",
 		// "#93278B", "#DF5353", "#7798BF", "#aaeeee"],
-		 /*colors: [{
-            linearGradient: perShapeGradient,
-            stops: [
-            	[0, '#1B2631'],
-                [1, '#3C546D']
-                ]
-            }, {
-            linearGradient: perShapeGradient,
-            stops: [
-                [0, '#0D293F'],
-                [1, '#1D6195']
-                ]
-            }, {
-            linearGradient: perShapeGradient,
-            stops: [
-                [0, '#0E2421'],
-                [1, '#337F75']
-                ]},{
-            linearGradient: perShapeGradient,
-            stops: [
-                [0, '#3F3F3F'],
-                [1, '#6E6F6F']
-                ]}, 
-        ],*/
+		 
 	chart: {
 		backgroundColor: null,
 		style: {
@@ -211,7 +214,10 @@ Highcharts.theme = {
 	background2: '#E0E0E8'
 
 };
-
+// Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+// 	  return Highcharts.Color(color).setOpacity(0.5).get('rgba');
+//     });
+    
 // Apply the theme
 Highcharts.setOptions(Highcharts.theme);
 

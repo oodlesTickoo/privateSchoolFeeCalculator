@@ -45,6 +45,7 @@ app.service('LineChartService', function() {
             },
             plotOptions: {
                 series: {
+                    lineWidth: 3,
                     marker: {
                         enabled: false
                     }
@@ -91,6 +92,7 @@ app.service('LineChartService', function() {
     this.createChart2 = function(presentValue_PrivateSchoolFeeArray, presentValue_PublicSchoolFeeArray, savingFeeArray, numChildren, nameArray) {
         $('#containerA').highcharts({
             chart: {
+
                 type: 'column',
                 height: 400,
                 renderTo: 'container',
@@ -119,9 +121,23 @@ app.service('LineChartService', function() {
                 margin: 30,
             },
             xAxis: {
+                gridLineColor: 'black',
+                 lineColor: 'black',
+                labels: {
+                    style: {
+                        color: 'black'
+                    }
+                },
                 categories: nameArray.slice(0, numChildren)
             },
             yAxis: {
+                gridLineColor: 'black',
+                labels: {
+                    style: {
+                        color: 'black'
+                    }
+                },
+                lineColor: 'black',
                 title: {
                     text: 'Amount($)'
                 },
@@ -170,7 +186,7 @@ app.service('LineChartService', function() {
                 data: savingFeeArray
             }]
         });
-        
+
     };
 
     this.createChart3 = function(propertyPurchasingPowerArray, remainderUnivFeeArray, projectedUnivFeeArray, numChildren, nameArray) {
@@ -255,7 +271,7 @@ app.service('LineChartService', function() {
                 data: projectedUnivFeeArray
             }]
         });
-        
+
     };
 
 
