@@ -300,12 +300,12 @@ app.controller("TTRController", ['$scope', '$timeout', 'PdfMaker', 'LineChartSer
     $scope.chartOneOpen = true;
     $scope.alterOption = false;
 
-    $scope.studyingOption1 = false;
-    $scope.studyingOption2 = false;
-    $scope.studyingOption3 = false;
-    $scope.studyingOption4 = false;
-    $scope.studyingOption5 = false;
-    $scope.studyingOption6 = false;
+    $scope.studyingOption1 = true;
+    $scope.studyingOption2 = true;
+    $scope.studyingOption3 = true;
+    $scope.studyingOption4 = true;
+    $scope.studyingOption5 = true;
+    $scope.studyingOption6 = true;
 
     $scope.indexlevel = 0.04;
 
@@ -370,21 +370,16 @@ app.controller("TTRController", ['$scope', '$timeout', 'PdfMaker', 'LineChartSer
                     $scope.schoolObjectsShow = $scope.schoolObject_TAS;
                 });
                 break;
-        };
+        }
         console.log("sel", $scope.schoolObjectsShow);
-        $('.sp1').selectpicker('refresh');
-        $('.sp2').selectpicker('refresh');
-        $('.sp3').selectpicker('refresh');
-        $('.sp4').selectpicker('refresh');
-        $('.sp5').selectpicker('refresh');
-        $('.sp6').selectpicker('refresh');
+        $('.spSchool1').selectpicker('refresh');
+        $('.spSchool2').selectpicker('refresh');
+        $('.spSchool3').selectpicker('refresh');
+        $('.spSchool4').selectpicker('refresh');
+        $('.spSchool5').selectpicker('refresh');
+        $('.spSchool6').selectpicker('refresh');
         $timeout(0);
 
-    });
-
-    $('.sp1').on('refreshed.bs.select', function(e) {
-        console.log(e, "refreshed");
-        $timeout(0);
     });
 
     $('input:radio[name=portfolioRadio]').change(function() {
@@ -407,38 +402,38 @@ app.controller("TTRController", ['$scope', '$timeout', 'PdfMaker', 'LineChartSer
         $timeout(0);
     };
 
-    $('.sp1').on('change', function() {
-        schoolArray[0] = $('.sp1 option:selected').val();
+    $('.spSchool1').on('change', function() {
+        schoolArray[0] = $('.spSchool1 option:selected').val();
         console.log("schoolArray[0]", schoolArray[0])
             //calculateFinal();
     });
 
-    $('.sp2').on('change', function() {
-        schoolArray[1] = $('.sp2 option:selected').val();
+    $('.spSchool2').on('change', function() {
+        schoolArray[1] = $('.spSchool2 option:selected').val();
         //console.log("schoolArray[1]", schoolArray[1])
         //calculateFinal();
     });
 
-    $('.sp3').on('change', function() {
-        schoolArray[2] = $('.sp3 option:selected').val();
+    $('.spSchool3').on('change', function() {
+        schoolArray[2] = $('.spSchool3 option:selected').val();
         //console.log("schoolArray[2]", schoolArray[2])
         //calculateFinal();
     });
 
-    $('.sp4').on('change', function() {
-        schoolArray[3] = $('.sp4 option:selected').val();
+    $('.spSchool4').on('change', function() {
+        schoolArray[3] = $('.spSchool4 option:selected').val();
         //console.log("schoolArray[3]", schoolArray[3])
         //calculateFinal();
     });
 
-    $('.sp5').on('change', function() {
-        schoolArray[4] = $('.sp5 option:selected').val();
+    $('.spSchool5').on('change', function() {
+        schoolArray[4] = $('.spSchool5 option:selected').val();
         //console.log("schoolArray[4]", schoolArray[4])
         //calculateFinal();
     });
 
-    $('.sp6').on('change', function() {
-        schoolArray[5] = $('.sp6 option:selected').val();
+    $('.spSchool6').on('change', function() {
+        schoolArray[5] = $('.spSchool6 option:selected').val();
         //console.log("schoolArray[5]", schoolArray[5])
         //calculateFinal();
     });
@@ -447,18 +442,18 @@ app.controller("TTRController", ['$scope', '$timeout', 'PdfMaker', 'LineChartSer
     $scope.begnYearInvestment = initDate.getFullYear();
     $scope.numChildren = 2;
     $scope.investmentReturn = 5000;
-    $scope.contStartYear = initDate.getFullYear();;
-    $scope.schoolYear1 = initDate.getFullYear();;
-    $scope.schoolDuration1 = 6
-    $scope.schoolYear2 = initDate.getFullYear();;
+    $scope.contStartYear = initDate.getFullYear();
+    $scope.schoolYear1 = initDate.getFullYear();
+    $scope.schoolDuration1 = 6;
+    $scope.schoolYear2 = initDate.getFullYear();
     $scope.schoolDuration2 = 6;
-    $scope.schoolYear3 = initDate.getFullYear();;
+    $scope.schoolYear3 = initDate.getFullYear();
     $scope.schoolDuration3 = 6;
-    $scope.schoolYear4 = initDate.getFullYear();;
+    $scope.schoolYear4 = initDate.getFullYear();
     $scope.schoolDuration4 = 6;
-    $scope.schoolYear5 = initDate.getFullYear();;
+    $scope.schoolYear5 = initDate.getFullYear();
     $scope.schoolDuration5 = 6;
-    $scope.schoolYear6 = initDate.getFullYear();;
+    $scope.schoolYear6 = initDate.getFullYear();
     $scope.schoolDuration6 = 6;
     $scope.endYearInvestment = Number($scope.schoolYear2) + Number($scope.schoolDuration2)
 
@@ -1128,7 +1123,7 @@ app.controller("TTRController", ['$scope', '$timeout', 'PdfMaker', 'LineChartSer
         { id: 2, name: "Major in Art" }
     ];
 
-    var majorSelectedArray = [0, 0, 0, 0, 0, 0]
+    var majorSelectedArray = [0, 0, 0, 0, 0, 0];
     var publicSchol_avgCostArray = [1615.33, 1395, 471.25, 762.5, 950, 357.14, 390];
     var commerceFeeArray = [10596, 10596, 10597, 10429, 13176, 10596, 10596];
     var medicalScienceFeeArray = [9823, 10596, 9782, 9439.33, 9896, 10596, 10596];
